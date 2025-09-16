@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Resources\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>
