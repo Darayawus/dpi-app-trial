@@ -4,13 +4,10 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	      <RuntimeIdentifiers>linux-x64;linux-arm64</RuntimeIdentifiers>
-    <!-- Agregar estas propiedades para TeamCity -->
+	<RuntimeIdentifiers>linux-x64;linux-arm64</RuntimeIdentifiers>    
     <IsTestProject>true</IsTestProject>
-    <IsPackable>false</IsPackable>	  <RuntimeIdentifiers>linux-x64;linux-arm64</RuntimeIdentifiers>
-	  <!-- Agregar estas propiedades para TeamCity -->
-	  <IsTestProject>true</IsTestProject>
-	  
+    <IsPackable>false</IsPackable>	  	  	
+	<AssemblyVersion>0.0.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Graphics\" />
+    <Folder Include="Api\" />
   </ItemGroup>
 
 </Project>

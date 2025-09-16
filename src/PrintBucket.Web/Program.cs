@@ -1,5 +1,6 @@
 using PrintBucket.Common.Logging;
 using Serilog;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,11 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+// Use prometheus middleware
+//TODO: Add to readme.MD that metrics security is disabled as this is a trial
+app.UseHttpMetrics();
+app.MapMetrics();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
