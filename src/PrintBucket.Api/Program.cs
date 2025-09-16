@@ -1,6 +1,7 @@
 using PrintBucket.Common.Logging;
 using Serilog;
 using System.Reflection;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Optional: configure Prometheus metrics
+// No services needed for basic prom-net middleware; you can add custom collectors here.
 
 try
 {
@@ -27,6 +31,13 @@ try
         app.UseSwaggerUI();
         Log.Information("Swagger enabled in development environment");
     }
+
+    // Use prometheus middleware to expose metrics
+    // Exposes /metrics for Prometheus to scrape and /metrics-text and /metrics for text and content-type negotiation
+    app.UseHttpMetrics();
+
+    // Map scrape endpoint; default is /metrics
+    app.MapMetrics();
 
     app.UseHttpsRedirection();
     app.UseAuthorization();
