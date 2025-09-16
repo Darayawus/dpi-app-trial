@@ -1,0 +1,90 @@
+# --- Build output
+[Bb]in/
+[Oo]bj/
+out/
+publish/
+artifacts/
+build/
+[Bb]uild/
+
+# --- Visual Studio / VS Code
+.vs/
+.vscode/
+*.suo
+*.user
+*.rsuser
+*.userosscache
+*.sln.docstates
+*.csproj.user
+
+# --- JetBrains Rider / IntelliJ
+.idea/
+*.sln.iml
+
+# --- Packages & NuGet
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+
+# --- Logs / test results / coverage
+*.log
+logs/
+[Tt]est[Rr]esults/
+*.trx
+*.coverage
+*.coveragexml
+
+# --- Binaries & symbols (extra safety)
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.cache
+*.ilk
+*.obj
+*.iobj
+*.ipdb
+
+# --- Databases (local dev)
+*.mdf
+*.ldf
+
+# --- Frontend (if present)
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- App settings / secrets (local only)
+.env
+.env.*
+appsettings.*.local.json
+appsettings.Local.json
+secrets.json
+
+# --- ASP.NET static libs (if using LibMan)
+**/wwwroot/lib/
+
+# --- ReSharper / analyzers
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# --- Sonar / scanners (optional)
+.sonarlint/
+.sonarqube/
+.scannerwork/
+
+# --- OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Temp
+~$*
+*.tmp
+*.temp
