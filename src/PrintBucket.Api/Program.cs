@@ -1,5 +1,6 @@
 using PrintBucket.Common.Logging;
 using Serilog;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,30 +17,30 @@ builder.Services.AddSwaggerGen();
 try
 {
     var app = builder.Build();
-    Log.Information("API PrintBucket construida correctamente");
+    Log.Information($"Starting PrintBucket API Version {Assembly.GetExecutingAssembly().GetName().Version}");
+
 
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
         app.UseSwaggerUI();
-        Log.Information("Swagger habilitado en modo desarrollo");
+        Log.Information("Swagger enabled in dev mode");
     }
 
     app.UseHttpsRedirection();
     app.UseAuthorization();
     app.MapControllers();
 
-    Log.Information("API PrintBucket iniciando...");
     app.Run();
-    Log.Information("API PrintBucket finalizada correctamente");
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "La API se detuvo inesperadamente");
+    Log.Fatal(ex, "ERROR: Unexpected error in API");
     throw;
 }
 finally
 {
+    Log.Information("PrintBucket API shutdown complete");
     Log.CloseAndFlush();
 }
