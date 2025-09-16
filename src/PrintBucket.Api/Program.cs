@@ -4,7 +4,7 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Inicializar Serilog
+// Initialize Serilog
 SerilogLogger.Initialize();
 builder.Host.UseSerilog();
 
@@ -25,7 +25,7 @@ try
     {
         app.UseSwagger();
         app.UseSwaggerUI();
-        Log.Information("Swagger enabled in dev mode");
+        Log.Information("Swagger enabled in development environment");
     }
 
     app.UseHttpsRedirection();
@@ -36,7 +36,7 @@ try
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "ERROR: Unexpected error in API");
+    Log.Fatal(ex, "ERROR: Unexpected error in PrintBucket API");
     throw;
 }
 finally
