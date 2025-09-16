@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PrintBucket.Common\PrintBucket.Common.csproj" />
+    <ProjectReference Include="..\PrintBucket.Graphics\PrintBucket.Graphics.csproj" />
   </ItemGroup>
 
 </Project>
