@@ -28,4 +28,8 @@
     <ProjectReference Include="..\PrintBucket.Models\PrintBucket.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Graphics\" />
+  </ItemGroup>
+
 </Project>

@@ -14,4 +14,8 @@
     <PackageReference Include="NetVips.Native.win-x64" Version="8.17.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PrintBucket.Common\PrintBucket.Common.csproj" />
+  </ItemGroup>
+
 </Project>
