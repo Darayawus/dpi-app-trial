@@ -241,6 +241,204 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a We may update this policy. We will post changes here with a revised effective date..
+        /// </summary>
+        public static string Privacy_Changes {
+            get {
+                return ResourceManager.GetString("Privacy_Changes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Changes to this policy.
+        /// </summary>
+        public static string Privacy_ChangesTitle {
+            get {
+                return ResourceManager.GetString("Privacy_ChangesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The service is not intended for children under 13. We do not knowingly collect personal data from children..
+        /// </summary>
+        public static string Privacy_Children {
+            get {
+                return ResourceManager.GetString("Privacy_Children", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Children.
+        /// </summary>
+        public static string Privacy_ChildrenTitle {
+            get {
+                return ResourceManager.GetString("Privacy_ChildrenTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a For privacy questions contact: dario@parresibarra.com.
+        /// </summary>
+        public static string Privacy_Contact {
+            get {
+                return ResourceManager.GetString("Privacy_Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contact.
+        /// </summary>
+        public static string Privacy_ContactTitle {
+            get {
+                return ResourceManager.GetString("Privacy_ContactTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Optional diagnostic and error reports (stack traces, logs) if you enable them to help us improve the product..
+        /// </summary>
+        public static string Privacy_DataCollected_Diagnostics {
+            get {
+                return ResourceManager.GetString("Privacy_DataCollected_Diagnostics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Files you upload (images), associated metadata (file names, bucket IDs) and optional descriptions you provide..
+        /// </summary>
+        public static string Privacy_DataCollected_FileUploads {
+            get {
+                return ResourceManager.GetString("Privacy_DataCollected_FileUploads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Usage data such as IP address, timestamps, request logs and performance metrics necessary to operate the service..
+        /// </summary>
+        public static string Privacy_DataCollected_Usage {
+            get {
+                return ResourceManager.GetString("Privacy_DataCollected_Usage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Data we collect.
+        /// </summary>
+        public static string Privacy_DataCollectedTitle {
+            get {
+                return ResourceManager.GetString("Privacy_DataCollectedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We use data to provide, operate and improve the service, to process uploads, to respond to support requests and to detect abuse..
+        /// </summary>
+        public static string Privacy_HowWeUse {
+            get {
+                return ResourceManager.GetString("Privacy_HowWeUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a How we use your data.
+        /// </summary>
+        public static string Privacy_HowWeUseTitle {
+            get {
+                return ResourceManager.GetString("Privacy_HowWeUseTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;p&gt;This privacy policy explains how PrintBucket collects, uses and discloses information when you use the Web UI and API.&lt;/p&gt;.
+        /// </summary>
+        public static string Privacy_Intro {
+            get {
+                return ResourceManager.GetString("Privacy_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Uploaded files and metadata are retained while your bucket exists or as required by law. You can request deletion; removal may take time to propagate..
+        /// </summary>
+        public static string Privacy_Retention {
+            get {
+                return ResourceManager.GetString("Privacy_Retention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Data retention.
+        /// </summary>
+        public static string Privacy_RetentionTitle {
+            get {
+                return ResourceManager.GetString("Privacy_RetentionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We apply standard security measures (TLS in transit, AWS access controls). The protection of stored objects depends on bucket policies and correct configuration..
+        /// </summary>
+        public static string Privacy_Security {
+            get {
+                return ResourceManager.GetString("Privacy_Security", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Security.
+        /// </summary>
+        public static string Privacy_SecurityTitle {
+            get {
+                return ResourceManager.GetString("Privacy_SecurityTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We use AWS services (S3, DynamoDB) and may use external analytics or monitoring providers. Their privacy policies apply to data they process..
+        /// </summary>
+        public static string Privacy_ThirdParties {
+            get {
+                return ResourceManager.GetString("Privacy_ThirdParties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Third‑party services.
+        /// </summary>
+        public static string Privacy_ThirdPartiesTitle {
+            get {
+                return ResourceManager.GetString("Privacy_ThirdPartiesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Privacy Policy.
+        /// </summary>
+        public static string Privacy_Title {
+            get {
+                return ResourceManager.GetString("Privacy_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You may request access, correction or deletion of personal data. Contact support and provide identification to exercise these rights..
+        /// </summary>
+        public static string Privacy_YourRights {
+            get {
+                return ResourceManager.GetString("Privacy_YourRights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your rights.
+        /// </summary>
+        public static string Privacy_YourRightsTitle {
+            get {
+                return ResourceManager.GetString("Privacy_YourRightsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Share instantly via QR code.
         /// </summary>
         public static string QRCodeNote {

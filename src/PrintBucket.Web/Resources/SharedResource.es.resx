@@ -29,4 +29,37 @@
   <data name="AccessCodeTitle" xml:space="preserve"><value>Usar código de acceso</value></data>
   <data name="AccessCodeLabel" xml:space="preserve"><value>Código de acceso</value></data>
   <data name="AccessButton" xml:space="preserve"><value>Acceder</value></data>
+
+  <!-- Privacy Policy -->
+  <data name="Privacy_Title"><value>Política de privacidad</value></data>
+  <data name="Privacy_Intro"><value>&lt;p&gt;Esta política de privacidad describe cómo PrintBucket recopila, utiliza y comunica información al usar la interfaz web y la API.&lt;/p&gt;</value></data>
+
+  <data name="Privacy_DataCollectedTitle"><value>Datos que recopilamos</value></data>
+  <data name="Privacy_DataCollected_Usage"><value>Datos de uso como dirección IP, marcas temporales, registros de peticiones y métricas necesarias para operar el servicio.</value></data>
+  <data name="Privacy_DataCollected_FileUploads"><value>Archivos que sube (imágenes), metadatos asociados (nombre de archivo, identificador de bucket) y descripciones opcionales.</value></data>
+  <data name="Privacy_DataCollected_Diagnostics"><value>Informes opcionales de diagnóstico y errores (stack traces, registros) si los habilita para ayudarnos a mejorar el producto.</value></data>
+
+  <data name="Privacy_HowWeUseTitle"><value>Cómo usamos sus datos</value></data>
+  <data name="Privacy_HowWeUse"><value>Usamos los datos para proporcionar, operar y mejorar el servicio, procesar subidas, responder soporte e investigar abusos.</value></data>
+
+  <data name="Privacy_ThirdPartiesTitle"><value>Servicios de terceros</value></data>
+  <data name="Privacy_ThirdParties"><value>Usamos servicios de AWS (S3, DynamoDB) y podemos usar proveedores externos de analítica o monitorización. Consulte sus políticas de privacidad.</value></data>
+
+  <data name="Privacy_RetentionTitle"><value>Conservación de datos</value></data>
+  <data name="Privacy_Retention"><value>Los archivos subidos y los metadatos se conservan mientras su bucket exista o cuando lo exija la ley. Puede solicitar la eliminación; la propagación puede tardar.</value></data>
+
+  <data name="Privacy_SecurityTitle"><value>Seguridad</value></data>
+  <data name="Privacy_Security"><value>Aplicamos medidas de seguridad estándar (TLS en tránsito, controles de acceso en AWS). La protección de los objetos depende de las políticas del bucket y su configuración.</value></data>
+
+  <data name="Privacy_YourRightsTitle"><value>Sus derechos</value></data>
+  <data name="Privacy_YourRights"><value>Puede solicitar acceso, rectificación o eliminación de sus datos personales. Contacte con soporte y aporte identificación para ejercer estos derechos.</value></data>
+
+  <data name="Privacy_ChildrenTitle"><value>Menores</value></data>
+  <data name="Privacy_Children"><value>El servicio no está destinado a menores de 13 años. No recopilamos conscientemente datos personales de menores.</value></data>
+
+  <data name="Privacy_ChangesTitle"><value>Cambios en esta política</value></data>
+  <data name="Privacy_Changes"><value>Podemos actualizar esta política. Publicaremos los cambios aquí con la fecha de vigencia revisada.</value></data>
+
+  <data name="Privacy_ContactTitle"><value>Contacto</value></data>
+  <data name="Privacy_Contact"><value>Para cuestiones de privacidad contacte: dario@parresibarra.com</value></data>
 </root>

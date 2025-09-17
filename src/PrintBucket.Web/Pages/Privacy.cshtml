@@ -1,8 +1,40 @@
 ﻿@page
-@model PrivacyModel
+@using PrintBucket.Web
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 @{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = L["Privacy_Title"];
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+@Html.Raw(L["Privacy_Intro"])
+
+<h2>@L["Privacy_DataCollectedTitle"]</h2>
+<ul>
+    <li>@L["Privacy_DataCollected_Usage"]</li>
+    <li>@L["Privacy_DataCollected_FileUploads"]</li>
+    <li>@L["Privacy_DataCollected_Diagnostics"]</li>
+</ul>
+
+<h2>@L["Privacy_HowWeUseTitle"]</h2>
+<p>@L["Privacy_HowWeUse"]</p>
+
+<h2>@L["Privacy_ThirdPartiesTitle"]</h2>
+<p>@L["Privacy_ThirdParties"]</p>
+
+<h2>@L["Privacy_RetentionTitle"]</h2>
+<p>@L["Privacy_Retention"]</p>
+
+<h2>@L["Privacy_SecurityTitle"]</h2>
+<p>@L["Privacy_Security"]</p>
+
+<h2>@L["Privacy_YourRightsTitle"]</h2>
+<p>@L["Privacy_YourRights"]</p>
+
+<h2>@L["Privacy_ChildrenTitle"]</h2>
+<p>@L["Privacy_Children"]</p>
+
+<h2>@L["Privacy_ChangesTitle"]</h2>
+<p>@L["Privacy_Changes"]</p>
+
+<h2>@L["Privacy_ContactTitle"]</h2>
+<p>@L["Privacy_Contact"]</p>

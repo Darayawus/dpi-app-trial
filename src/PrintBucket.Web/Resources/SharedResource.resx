@@ -75,4 +75,37 @@
   <data name="AccessButton" xml:space="preserve">
     <value>Access</value>
   </data>
+
+  <!-- Privacy policy -->
+  <data name="Privacy_Title"><value>Privacy Policy</value></data>
+  <data name="Privacy_Intro"><value>&lt;p&gt;This privacy policy explains how PrintBucket collects, uses and discloses information when you use the Web UI and API.&lt;/p&gt;</value></data>
+
+  <data name="Privacy_DataCollectedTitle"><value>Data we collect</value></data>
+  <data name="Privacy_DataCollected_Usage"><value>Usage data such as IP address, timestamps, request logs and performance metrics necessary to operate the service.</value></data>
+  <data name="Privacy_DataCollected_FileUploads"><value>Files you upload (images), associated metadata (file names, bucket IDs) and optional descriptions you provide.</value></data>
+  <data name="Privacy_DataCollected_Diagnostics"><value>Optional diagnostic and error reports (stack traces, logs) if you enable them to help us improve the product.</value></data>
+
+  <data name="Privacy_HowWeUseTitle"><value>How we use your data</value></data>
+  <data name="Privacy_HowWeUse"><value>We use data to provide, operate and improve the service, to process uploads, to respond to support requests and to detect abuse.</value></data>
+
+  <data name="Privacy_ThirdPartiesTitle"><value>Third‑party services</value></data>
+  <data name="Privacy_ThirdParties"><value>We use AWS services (S3, DynamoDB) and may use external analytics or monitoring providers. Their privacy policies apply to data they process.</value></data>
+
+  <data name="Privacy_RetentionTitle"><value>Data retention</value></data>
+  <data name="Privacy_Retention"><value>Uploaded files and metadata are retained while your bucket exists or as required by law. You can request deletion; removal may take time to propagate.</value></data>
+
+  <data name="Privacy_SecurityTitle"><value>Security</value></data>
+  <data name="Privacy_Security"><value>We apply standard security measures (TLS in transit, AWS access controls). The protection of stored objects depends on bucket policies and correct configuration.</value></data>
+
+  <data name="Privacy_YourRightsTitle"><value>Your rights</value></data>
+  <data name="Privacy_YourRights"><value>You may request access, correction or deletion of personal data. Contact support and provide identification to exercise these rights.</value></data>
+
+  <data name="Privacy_ChildrenTitle"><value>Children</value></data>
+  <data name="Privacy_Children"><value>The service is not intended for children under 13. We do not knowingly collect personal data from children.</value></data>
+
+  <data name="Privacy_ChangesTitle"><value>Changes to this policy</value></data>
+  <data name="Privacy_Changes"><value>We may update this policy. We will post changes here with a revised effective date.</value></data>
+
+  <data name="Privacy_ContactTitle"><value>Contact</value></data>
+  <data name="Privacy_Contact"><value>For privacy questions contact: dario@parresibarra.com</value></data>
 </root>
