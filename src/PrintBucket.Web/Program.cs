@@ -1,6 +1,9 @@
 using PrintBucket.Common.Logging;
 using Serilog;
 using Prometheus;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +13,20 @@ builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-//Add Controllers
-builder.Services.AddControllers(); 
+// Add Controllers
+builder.Services.AddControllers();
+
+// Localización: indicar carpeta Resources
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("es") };
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("en");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
 
 var app = builder.Build();
 
@@ -23,8 +38,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// Use prometheus middleware
-//TODO: Add to readme.MD that metrics security is disabled as this is a trial
+// Use prometheus middleware 
+//TODO: this is a trial, no protection here right now
 app.UseHttpMetrics();
 app.MapMetrics();
 
@@ -32,6 +47,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// Activar middleware de localización usando la configuración registrada
+var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
+app.UseRequestLocalization(locOptions);
 
 app.UseAuthorization();
 

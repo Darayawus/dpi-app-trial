@@ -14,12 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PrintBucket.AWS\PrintBucket.AWS.csproj" />
     <ProjectReference Include="..\PrintBucket.Common\PrintBucket.Common.csproj" />
     <ProjectReference Include="..\PrintBucket.Graphics\PrintBucket.Graphics.csproj" />
   </ItemGroup>
-
-    <ItemGroup Condition="'$(Configuration)'=='Release'">
-        <None Update="appsettings.Development.json" CopyToOutputDirectory="Never" />
-    </ItemGroup>
 
 </Project>

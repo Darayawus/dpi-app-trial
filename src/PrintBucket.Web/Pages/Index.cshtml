@@ -1,10 +1,31 @@
 ﻿@page
 @model IndexModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PrintBucket.Web.SharedResource> L
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = L["HomeTitle"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="full-bleed full-viewport index-hero">
+    <div class="text-center">
+        <img src="~/img/index_img.png" alt="@L["ImageAlt"]" class="img-fluid mb-4" />
+        <p><a class="btn-start" href="@Url.Page("/Privacy")">@L["Start"]</a></p>
+    </div>
 </div>
+
+@section Scripts {
+<script>
+(function() {
+    var seconds = 10;
+    var el = document.getElementById('count');
+    var targetUrl = '@Url.Page("/Privacy")';
+    var timer = setInterval(function() {
+        seconds--;
+        if (el) el.textContent = seconds;
+        if (seconds <= 0) {
+            clearInterval(timer);
+            //window.location.href = targetUrl;
+        }
+    }, 1000);
+})();
+</script>
+}

@@ -8,20 +8,20 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PrintBucket.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">PrintBucket</a>
+                <a class="navbar-brand p-0" asp-area="" asp-page="/Index">
+                    <img src="~/img/header_logo.png" alt="PrintBucket" class="navbar-brand-logo" />
+                    <span class="visually-hidden">PrintBucket</span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
+                    <ul class="navbar-nav flex-grow-1">                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
@@ -30,15 +30,16 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+    <div class="container flex-grow-1 d-flex flex-column">
+        <main role="main" class="flex-grow-1">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - PrintBucket - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer class="footer text-muted mt-auto">
+        <div class="text-end pe-4">
+            &copy; 2025 - Print Bucket - <a href="https://darioparres.com" target="_blank" rel="noopener noreferrer">darioparres.com</a>
         </div>
     </footer>
 
