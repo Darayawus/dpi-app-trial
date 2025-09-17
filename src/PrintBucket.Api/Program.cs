@@ -1,4 +1,5 @@
 using Amazon;
+using Amazon.BedrockRuntime;
 using Amazon.DynamoDBv2;
 using Amazon.Runtime;
 using Amazon.Runtime.CredentialManagement;
@@ -48,6 +49,14 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
     return resolvedCredentials is not null
         ? new AmazonS3Client(resolvedCredentials, region)
         : new AmazonS3Client(region);
+});
+
+// Register Bedrock client using resolved credentials (if any) or default resolution
+builder.Services.AddSingleton<IAmazonBedrockRuntime>(sp =>
+{
+    return resolvedCredentials is not null
+        ? new AmazonBedrockRuntimeClient(resolvedCredentials, region)
+        : new AmazonBedrockRuntimeClient(region);
 });
 
 builder.Services.AddScoped<IBucketService, BucketService>();

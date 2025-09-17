@@ -23,7 +23,7 @@ namespace PrintBucket.AWS.Services
         public BucketService(IAmazonDynamoDB dynamoDb)
         {
             _dynamoDb = dynamoDb;
-            _logger = Log.ForContext<BedrockImageAnalyzer>();
+            _logger = Log.ForContext<BucketService>();
 
         }
 

@@ -13,17 +13,12 @@ namespace PrintBucket.AWS.Services
 
     public class BedrockImageAnalyzer : IBedrockImageAnalyzer
     {
-        private readonly AmazonBedrockRuntimeClient _bedrockClient;
+        private readonly IAmazonBedrockRuntime _bedrockClient;
         private readonly ILogger _logger;
 
-        public BedrockImageAnalyzer(string awsAccessKey, string awsSecretKey, string awsRegion)
+        public BedrockImageAnalyzer(IAmazonBedrockRuntime bedrockClient)
         {
-            var config = new AmazonBedrockRuntimeConfig
-            {
-                RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(awsRegion)
-            };
-
-            _bedrockClient = new AmazonBedrockRuntimeClient(awsAccessKey, awsSecretKey, config);
+            _bedrockClient = bedrockClient;
             _logger = Log.ForContext<BedrockImageAnalyzer>();
         }
 
@@ -37,7 +32,7 @@ namespace PrintBucket.AWS.Services
                 var imageSize = base64Image.Length * 3 / 4; // Approximate size in bytes
                 _logger.Debug("Processing image of size: {ImageSizeKB}KB", imageSize / 1024);
 
-                // Crear el prompt para Claude-3
+                // Build the prompt for Claude-3 (English)
                 var prompt = new
                 {
                     anthropic_version = "claude-3-sonnet-20240229",
@@ -95,7 +90,7 @@ namespace PrintBucket.AWS.Services
                         .RootElement
                         .GetProperty("content")
                         .GetProperty("text")
-                        .GetString() ?? "No se pudo obtener descripción",
+                        .GetString() ?? "Could not obtain description",
                     RawResponse = jsonResponse
                 };
 

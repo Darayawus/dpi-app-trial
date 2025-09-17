@@ -62,6 +62,14 @@
                                 <small class="text-muted">
                                     <i class="bi bi-calendar3"></i> @Model.Bucket.CreatedAt.ToLocalTime().ToString("g")
                                 </small>
+
+                                <!-- Access code under the date -->
+                                <div class="mt-2">
+                                    <small class="text-muted">
+                                        @L["AccessCodeLabel"]: 
+                                        <span class="badge bg-light text-dark ms-2">@Model.Bucket.AccessCode</span>
+                                    </small>
+                                </div>
                             </div>
                             
                             <!-- Upload button on the right -->
