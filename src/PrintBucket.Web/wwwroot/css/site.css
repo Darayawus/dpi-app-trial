@@ -214,3 +214,18 @@ body {
         padding-bottom: 2rem !important;
     }
 }
+
+/* Añadir al final del archivo */
+.scanning-line {
+    width: 100%;
+    height: 2px;
+    background: rgba(82, 168, 236, 0.8);
+    animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+    0% { transform: translateY(-100px); }
+    50% { transform: translateY(100px); }
+    100% { transform: translateY(-100px); }
+}
+

@@ -75,6 +75,12 @@
   <data name="AccessButton" xml:space="preserve">
     <value>Access</value>
   </data>
+  <data name="QRScan_Instructions"><value>Point the camera at a QR code</value></data>
+  <data name="QRScan_Requesting"><value>Requesting camera access...</value></data>
+  <data name="QRScan_Searching"><value>Searching for QR code...</value></data>
+  <data name="QRScan_Error"><value>Could not access camera</value></data>
+  <data name="ScanQRTitle"><value>Scan QR Code</value></data>
+  <data name="Cancel"><value>Cancel</value></data>
 
   <!-- Privacy policy -->
   <data name="Privacy_Title"><value>Privacy Policy</value></data>

@@ -124,6 +124,15 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Create space.
         /// </summary>
         public static string CreateButton {
@@ -448,11 +457,56 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Could not access camera.
+        /// </summary>
+        public static string QRScan_Error {
+            get {
+                return ResourceManager.GetString("QRScan_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Point the camera at a QR code.
+        /// </summary>
+        public static string QRScan_Instructions {
+            get {
+                return ResourceManager.GetString("QRScan_Instructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Requesting camera access....
+        /// </summary>
+        public static string QRScan_Requesting {
+            get {
+                return ResourceManager.GetString("QRScan_Requesting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Searching for QR code....
+        /// </summary>
+        public static string QRScan_Searching {
+            get {
+                return ResourceManager.GetString("QRScan_Searching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Scan QR.
         /// </summary>
         public static string ScanQRButton {
             get {
                 return ResourceManager.GetString("ScanQRButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Scan QR Code.
+        /// </summary>
+        public static string ScanQRTitle {
+            get {
+                return ResourceManager.GetString("ScanQRTitle", resourceCulture);
             }
         }
         

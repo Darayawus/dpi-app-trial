@@ -8,30 +8,65 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
-            <h1 class="display-6 mb-4">@L["AccessTitle"]</h1>
-
-            <div class="card mb-4">
+            <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title mb-3">@L["AccessQRTitle"]</h5>
-                    <p class="card-text">@L["AccessQRDescription"]</p>
-                    <button class="btn btn-primary" id="scanQRBtn">
-                        <i class="bi bi-qr-code-scan me-2"></i>@L["ScanQRButton"]
-                    </button>
+                    <h1 class="display-6 mb-4">@L["AccessTitle"]</h1>
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">@L["AccessQRTitle"]</h5>
+                            <p class="card-text">@L["AccessQRDescription"]</p>
+                            <button class="btn btn-primary" id="scanQRBtn" type="button">
+                                <i class="bi bi-qr-code-scan me-2"></i>@L["ScanQRButton"]
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">@L["AccessCodeTitle"]</h5>
+                            <form method="post" class="needs-validation" novalidate>
+                                <div class="mb-3">
+                                    <label asp-for="Input.AccessCode" class="form-label">@L["AccessCodeLabel"]</label>
+                                    <input asp-for="Input.AccessCode" class="form-control form-control-lg" required />
+                                    <span asp-validation-for="Input.AccessCode" class="text-danger"></span>
+                                </div>
+                                <button type="submit" class="btn btn-primary">@L["AccessButton"]</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title mb-3">@L["AccessCodeTitle"]</h5>
-                    <form method="post" class="needs-validation" novalidate>
-                        <div class="mb-3">
-                            <label asp-for="Input.AccessCode" class="form-label">@L["AccessCodeLabel"]</label>
-                            <input asp-for="Input.AccessCode" class="form-control form-control-lg" required />
-                            <span asp-validation-for="Input.AccessCode" class="text-danger"></span>
-                        </div>
-                        <button type="submit" class="btn btn-primary">@L["AccessButton"]</button>
-                    </form>
+<!-- Camera Modal -->
+<div class="modal fade" id="cameraModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@L["ScanQRTitle"]</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="position-relative">
+                    <!-- Video feed with scanning overlay -->
+                    <div class="ratio ratio-16x9 bg-dark">
+                        <video id="qrVideo" playsinline class="w-100"></video>
+                    </div>
+                    <!-- Scanning animation overlay -->
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                        <div class="scanning-line"></div>
+                    </div>
                 </div>
+                <!-- Status message -->
+                <div class="p-3 text-center">
+                    <small id="scanStatus" class="text-muted">@L["QRScan_Instructions"]</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">@L["Cancel"]</button>
             </div>
         </div>
     </div>
@@ -39,4 +74,98 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script>
+        (function () {
+            const video = document.getElementById('qrVideo');
+            const scanBtn = document.getElementById('scanQRBtn');
+            const scanStatus = document.getElementById('scanStatus');
+            const modal = new bootstrap.Modal(document.getElementById('cameraModal'));
+            
+            let stream = null;
+            let scanning = false;
+            
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+            function stopScanning() {
+                scanning = false;
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                    stream = null;
+                }
+            }
+
+            async function startScanning() {
+                try {
+                    scanStatus.textContent = '@L["QRScan_Requesting"]';
+                    
+                    const constraints = {
+                        video: {
+                            facingMode: { ideal: 'environment' },
+                            width: { ideal: 1280 },
+                            height: { ideal: 720 }
+                        }
+                    };
+
+                    stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    video.srcObject = stream;
+                    await video.play();
+
+                    scanning = true;
+                    scanStatus.textContent = '@L["QRScan_Searching"]';
+                    requestAnimationFrame(scan);
+
+                } catch (err) {
+                    console.error('Camera error:', err);
+                    scanStatus.textContent = '@L["QRScan_Error"]';
+                }
+            }
+
+            function scan() {
+                if (!scanning) return;
+
+                if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+                    const code = jsQR(imageData.data, imageData.width, imageData.height, {
+                        inversionAttempts: "dontInvert"
+                    });
+
+                    if (code) {
+                        stopScanning();
+                        modal.hide();
+                        
+                        const input = document.querySelector('input[name="Input.AccessCode"]');
+                        if (input) {
+                            input.value = code.data;
+                            input.form.requestSubmit(); // Use requestSubmit to trigger form validation
+                        }
+                    } else {
+                        requestAnimationFrame(scan);
+                    }
+                } else {
+                    requestAnimationFrame(scan);
+                }
+            }
+
+            scanBtn.addEventListener('click', () => {
+                modal.show();
+                startScanning();
+            });
+
+            document.getElementById('cameraModal').addEventListener('hidden.bs.modal', stopScanning);
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden && scanning) {
+                    stopScanning();
+                    modal.hide();
+                }
+            });
+        })();
+    </script>
 }
