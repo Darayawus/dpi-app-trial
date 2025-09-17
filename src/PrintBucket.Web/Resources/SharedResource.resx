@@ -73,7 +73,7 @@
     <value>Use access code</value>
   </data>
   <data name="AccessCodeLabel" xml:space="preserve">
-    <value>Access code</value>
+    <value>Access Code</value>
   </data>
   <data name="AccessButton" xml:space="preserve">
     <value>Access</value>
@@ -117,4 +117,10 @@
 
   <data name="Privacy_ContactTitle"><value>Contact</value></data>
   <data name="Privacy_Contact"><value>For privacy questions contact: dario@parresibarra.com</value></data>
+  <data name="AccessCode_Required" xml:space="preserve">
+    <value>Access code is required</value>
+  </data>
+  <data name="AccessCode_Length" xml:space="preserve">
+    <value>Access code must be between {2} and {1} characters</value>
+  </data>
 </root>

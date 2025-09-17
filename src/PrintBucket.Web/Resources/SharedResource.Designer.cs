@@ -88,7 +88,25 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Access code.
+        ///   Busca una cadena traducida similar a Access code must be between {2} and {1} characters.
+        /// </summary>
+        public static string AccessCode_Length {
+            get {
+                return ResourceManager.GetString("AccessCode_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Access code is required.
+        /// </summary>
+        public static string AccessCode_Required {
+            get {
+                return ResourceManager.GetString("AccessCode_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Access Code.
         /// </summary>
         public static string AccessCodeLabel {
             get {

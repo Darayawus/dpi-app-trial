@@ -27,7 +27,7 @@
   <data name="AccessQRDescription" xml:space="preserve"><value>Usa la cámara de tu dispositivo para escanear el código QR de tu espacio</value></data>
   <data name="ScanQRButton" xml:space="preserve"><value>Escanear QR</value></data>
   <data name="AccessCodeTitle" xml:space="preserve"><value>Usar código de acceso</value></data>
-  <data name="AccessCodeLabel" xml:space="preserve"><value>Código de acceso</value></data>
+  <data name="AccessCodeLabel" xml:space="preserve"><value>Código de Acceso</value></data>
   <data name="AccessButton" xml:space="preserve"><value>Acceder</value></data>
   <data name="Access"><value>Accede a tu espacio</value></data>
 
@@ -69,4 +69,10 @@
   <data name="QRScan_Error"><value>No se pudo acceder a la cámara</value></data>
   <data name="ScanQRTitle"><value>Escanear Código QR</value></data>
   <data name="Cancel"><value>Cancelar</value></data>
+  <data name="AccessCode_Required" xml:space="preserve">
+    <value>El código de acceso es requerido</value>
+  </data>
+  <data name="AccessCode_Length" xml:space="preserve">
+    <value>El código debe tener entre {2} y {1} caracteres</value>
+  </data>
 </root>
