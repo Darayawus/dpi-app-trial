@@ -55,7 +55,7 @@ namespace PrintBucket.Web.Pages
                     status = "Active"
                 };
 
-                var response = await _httpClient.PostAsJsonAsync("api/buckets", request);
+                var response = await _httpClient.PostAsJsonAsync("buckets", request);
                 
                 if (response.IsSuccessStatusCode)
                 {

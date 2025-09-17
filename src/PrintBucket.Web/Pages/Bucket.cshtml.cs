@@ -27,13 +27,13 @@ namespace PrintBucket.Web.Pages
         {
             try
             {
-                var response = await _httpClient.GetAsync($"api/buckets/{id}");
+                var response = await _httpClient.GetAsync($"buckets/{id}");
                 if (response.IsSuccessStatusCode)
                 {
                     Bucket = await response.Content.ReadFromJsonAsync<PrintBucket.Models.Bucket>();
                     
                     // Obtener imágenes
-                    var imagesResponse = await _httpClient.GetAsync($"api/images/bucket/{id}");
+                    var imagesResponse = await _httpClient.GetAsync($"images/bucket/{id}");
                     if (imagesResponse.IsSuccessStatusCode)
                     {
                         Images = await imagesResponse.Content.ReadFromJsonAsync<List<ImageRecord>>() ?? new();

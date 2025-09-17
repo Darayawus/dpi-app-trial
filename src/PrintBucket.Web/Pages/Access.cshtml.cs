@@ -45,7 +45,7 @@ namespace PrintBucket.Web.Pages
             {
                 _logger.LogInformation("Attempting to validate access code: {AccessCode} {Url}", Input.AccessCode, _httpClient.BaseAddress);
                 
-                var response = await _httpClient.GetAsync($"api/buckets/access/{Input.AccessCode}");
+                var response = await _httpClient.GetAsync($"buckets/access/{Input.AccessCode}");
                 _logger.LogDebug("API response status: {StatusCode} for access code: {AccessCode}", 
                     response.StatusCode, Input.AccessCode);
 
