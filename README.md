@@ -1,5 +1,8 @@
 ﻿# PrintBucket
 
+**Trial version — 0.0.0**  
+This repository contains a trial implementation of PrintBucket intended to evaluate feasibility. The project is work-in-progress and many features, hardening and production tasks remain to be completed.
+
 Summary
 -------
 PrintBucket is an application composed of a Razor Pages UI (`PrintBucket.Web`), a REST API (`PrintBucket.Api`) and AWS helper libraries (`PrintBucket.AWS`). 

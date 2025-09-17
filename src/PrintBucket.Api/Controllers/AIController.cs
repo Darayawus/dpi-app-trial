@@ -24,7 +24,7 @@ namespace PrintBucket.Api.Controllers
             {
                 if (image == null || image.Length == 0)
                 {
-                    return BadRequest("No se ha proporcionado ninguna imagen");
+                    return BadRequest("No image provided");
                 }
 
                 using var memoryStream = new MemoryStream();
@@ -36,8 +36,8 @@ namespace PrintBucket.Api.Controllers
 
                 if (!result.Success)
                 {
-                    _logger.LogError("Error al analizar la imagen: {Error}", result.Error);
-                    return StatusCode(500, new { error = "Error al analizar la imagen", details = result.Error });
+                    _logger.LogError("Error analyzing image: {Error}", result.Error);
+                    return StatusCode(500, new { error = "Error analyzing image", details = result.Error });
                 }
 
                 return Ok(new
@@ -48,8 +48,8 @@ namespace PrintBucket.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error al procesar la solicitud de análisis de imagen");
-                return StatusCode(500, new { error = "Error interno del servidor", details = ex.Message });
+                _logger.LogError(ex, "Error processing image analysis request");
+                return StatusCode(500, new { error = "Internal server error", details = ex.Message });
             }
         }
     }

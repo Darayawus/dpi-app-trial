@@ -36,8 +36,8 @@ namespace PrintBucket.AWS.Services
                 AccessCode = GenerateAccessCode()
             };
 
-            // Asegurar que la tabla usa clave compuesta: 'hash_key' y 'range_key'
-            // Usamos 'hash_key' = space.Id y 'range_key' = Guid para unicidad
+            // Ensure the table uses a composite key: 'hash_key' and 'range_key'
+            // We use 'hash_key' = space.Id and 'range_key' = Guid for uniqueness
             //var rangeKey = Guid.NewGuid().ToString();
             var rangeKey = space.Id;
             space.Id = $"bucket-{space.AccessCode}";
@@ -62,14 +62,14 @@ namespace PrintBucket.AWS.Services
 
         private string GenerateAccessCode()
         {
-            // Genera un código de 8 caracteres alfanuméricos
+            // Generates an 8-character alphanumeric code
             //TODO: Check if the access code is unique
             return Path.GetRandomFileName().Replace(".", "")[..8].ToUpper();
         }
 
         public async Task<Bucket?> GetBucketByIdAsync(string id)
         {
-            // Para tablas con clave compuesta podemos consultar por la clave de partición (hash_key)
+            // For tables with a composite key we can query by the partition key (hash_key)
             var request = new QueryRequest
             {
                 TableName = TableName,
@@ -128,7 +128,7 @@ namespace PrintBucket.AWS.Services
 
         private Bucket MapToBucket(Dictionary<string, AttributeValue> item)
         {
-            // Mapear usando los nombres reales de atributos en la tabla
+            // Map using the actual attribute names in the table
             return new Bucket
             {
                 Id = item.ContainsKey("hash_key") ? item["hash_key"].S : (item.ContainsKey("id") ? item["id"].S : string.Empty),

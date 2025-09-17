@@ -16,11 +16,11 @@ var builder = WebApplication.CreateBuilder(args);
 SerilogLogger.Initialize();
 builder.Host.UseSerilog();
 
-// Configurar AWS (leer opciones desde appsettings / entorno)
-// Obtener región (fallback a eu-west-1)
+// Configure AWS (read options from appsettings / environment)
+// Get region (fallback to eu-west-1)
 var region = RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"] ?? "eu-west-1");
 
-// Intentar resolver credenciales por perfil en desarrollo
+// Try resolving credentials from profile in development
 AWSCredentials? resolvedCredentials = null;
 if (builder.Environment.IsDevelopment())
 {
@@ -34,7 +34,7 @@ if (builder.Environment.IsDevelopment())
 }
 
 // Add services to the container.
-// Registrar cliente DynamoDB usando las credenciales resueltas (si hay) o resolución automática
+// Register DynamoDB client using resolved credentials (if any) or default resolution
 builder.Services.AddSingleton<IAmazonDynamoDB>(sp =>
 {
     return resolvedCredentials is not null
@@ -42,7 +42,7 @@ builder.Services.AddSingleton<IAmazonDynamoDB>(sp =>
         : new AmazonDynamoDBClient(region);
 });
 
-// Registrar cliente S3
+// Register S3 client
 builder.Services.AddSingleton<IAmazonS3>(sp =>
 {
     return resolvedCredentials is not null
@@ -50,10 +50,11 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
         : new AmazonS3Client(region);
 });
 
-
 builder.Services.AddScoped<IBucketService, BucketService>();
 builder.Services.AddScoped<IS3StorageService, S3StorageService>();
 builder.Services.AddScoped<IImageService, ImageService>();
+// Register AI services
+builder.Services.AddScoped<IBedrockImageAnalyzer, BedrockImageAnalyzer>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
