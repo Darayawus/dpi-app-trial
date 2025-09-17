@@ -81,4 +81,7 @@
 	<data name="AccessCode_Error" xml:space="preserve">
     <value>Ocurrió un error al validar el código de acceso. Por favor, inténtalo más tarde.</value>
 </data>
+	<data name="CreateBucket_Error" xml:space="preserve">
+    <value>Ocurrió un error al crear tu espacio. Por favor, inténtalo más tarde.</value>
+</data>
 </root>

@@ -178,6 +178,15 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while creating your bucket. Please try again later..
+        /// </summary>
+        public static string CreateBucket_Error {
+            get {
+                return ResourceManager.GetString("CreateBucket_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Create space.
         /// </summary>
         public static string CreateButton {

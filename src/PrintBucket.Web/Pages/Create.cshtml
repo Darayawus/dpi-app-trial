@@ -12,7 +12,17 @@
                 <div class="card-body">
             <h1 class="display-6 mb-4">@L["CreateTitle"]</h1>
             
-            <form method="post" class="needs-validation" novalidate>
+            <form id="createForm" method="post" class="needs-validation" novalidate>
+                @if (!ModelState.IsValid && ModelState[string.Empty]?.Errors.Any() == true)
+                {
+                    <div class="alert alert-danger mb-4">
+                        @foreach (var error in ModelState[string.Empty].Errors)
+                        {
+                            <p class="mb-0">@error.ErrorMessage</p>
+                        }
+                    </div>
+                }
+
                 <div class="mb-4">
                     <label asp-for="Input.Email" class="form-label">@L["EmailLabel"]</label>
                     <input asp-for="Input.Email" class="form-control form-control-lg" type="email" required />
@@ -39,7 +49,10 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg btn-app w-100">@L["CreateButton"]</button>
+                <button id="createSubmit" type="submit" class="btn btn-primary btn-lg btn-app w-100 d-inline-flex align-items-center justify-content-center">
+                    <span id="createSpinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+                    <span>@L["CreateButton"]</span>
+                </button>
             </form>
             </div>            
             </div>
@@ -49,4 +62,28 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function() {
+            const form = document.getElementById('createForm');
+            const submitBtn = document.getElementById('createSubmit');
+            const spinner = document.getElementById('createSpinner');
+
+            if (form && submitBtn && spinner) {
+                form.addEventListener('submit', function(e) {
+                    if (this.checkValidity()) {
+                        spinner.classList.remove('d-none');
+                        submitBtn.setAttribute('disabled', 'disabled');
+                    }
+                });
+
+                // Ocultar spinner si hay errores después de postback
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (document.querySelector('.validation-summary-errors, .field-validation-error, .alert-danger')) {
+                        spinner.classList.add('d-none');
+                        submitBtn.removeAttribute('disabled');
+                    }
+                });
+            }
+        })();
+    </script>
 }

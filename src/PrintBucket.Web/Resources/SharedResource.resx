@@ -129,4 +129,7 @@
   <data name="AccessCode_Error" xml:space="preserve">
     <value>An error occurred while validating the access code. Please try again later.</value>
   </data>
+  <data name="CreateBucket_Error" xml:space="preserve">
+    <value>An error occurred while creating your bucket. Please try again later.</value>
+  </data>
 </root>

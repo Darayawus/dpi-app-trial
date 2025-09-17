@@ -11,7 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Api\**" />
+    <EmbeddedResource Remove="Api\**" />
+    <None Remove="Api\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="xunit" Version="2.9.3" />
 	  <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3">
 		  <PrivateAssets>all</PrivateAssets>
@@ -20,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PrintBucket.AWS\PrintBucket.AWS.csproj" />
     <ProjectReference Include="..\PrintBucket.Common\PrintBucket.Common.csproj" />
     <ProjectReference Include="..\PrintBucket.Graphics\PrintBucket.Graphics.csproj" />
     <ProjectReference Include="..\PrintBucket.Models\PrintBucket.Models.csproj" />
@@ -27,7 +35,6 @@
 
   <ItemGroup>
     <Folder Include="Graphics\" />
-    <Folder Include="Api\" />
   </ItemGroup>
 
 </Project>
