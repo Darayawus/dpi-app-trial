@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Localization;
 
 namespace PrintBucket.Web.Pages
 {
@@ -8,13 +9,16 @@ namespace PrintBucket.Web.Pages
     {
         private readonly ILogger<AccessModel> _logger;
         private readonly HttpClient _httpClient;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
         public AccessModel(
             ILogger<AccessModel> logger,
-            IHttpClientFactory httpClientFactory)
+            IHttpClientFactory httpClientFactory,
+            IStringLocalizer<SharedResource> localizer)
         {
             _logger = logger;
             _httpClient = httpClientFactory.CreateClient("PrintBucketApi");
+            _localizer = localizer;
         }
 
         [BindProperty]
@@ -40,16 +44,29 @@ namespace PrintBucket.Web.Pages
                 if (response.IsSuccessStatusCode)
                 {
                     var bucket = await response.Content.ReadFromJsonAsync<PrintBucket.Models.Bucket>();
-                    return RedirectToPage("/Bucket", new { id = bucket?.Id });
+                    if (bucket == null)
+                    {
+                        ModelState.AddModelError(string.Empty, _localizer["AccessCode_Invalid"]);
+                        return Page();
+                    }
+                    return RedirectToPage("/Bucket", new { id = bucket.Id });
                 }
                 
-                ModelState.AddModelError(string.Empty, "Invalid access code");
+                // Manejar específicamente NotFound
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    ModelState.AddModelError(string.Empty, _localizer["AccessCode_Invalid"]);
+                    return Page();
+                }
+                
+                // Otros errores HTTP
+                ModelState.AddModelError(string.Empty, _localizer["AccessCode_Error"]);
                 return Page();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error validating access code");
-                ModelState.AddModelError(string.Empty, "An error occurred. Please try again later.");
+                _logger.LogError(ex, "Error validating access code {Code}", Input.AccessCode);
+                ModelState.AddModelError(string.Empty, _localizer["AccessCode_Error"]);
                 return Page();
             }
         }

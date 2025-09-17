@@ -1,4 +1,5 @@
 @page
+@using Microsoft.AspNetCore.Mvc.ModelBinding
 @model PrintBucket.Web.Pages.AccessModel
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 @{
@@ -25,6 +26,17 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title mb-3">@L["AccessCodeTitle"]</h5>
+                            
+                            @if (!ModelState.IsValid && ModelState[string.Empty]?.Errors.Any() == true)
+                            {
+                                <div class="alert alert-danger mb-3">
+                                    @foreach (var error in ModelState[string.Empty].Errors)
+                                    {
+                                        <p class="mb-0">@error.ErrorMessage</p>
+                                    }
+                                </div>
+                            }
+
                             <form method="post" class="needs-validation" novalidate>
                                 <div class="mb-3">
                                     <label asp-for="Input.AccessCode" class="form-label">@L["AccessCodeLabel"]</label>

@@ -88,6 +88,24 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while validating the access code. Please try again later..
+        /// </summary>
+        public static string AccessCode_Error {
+            get {
+                return ResourceManager.GetString("AccessCode_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invalid access code. Please check and try again..
+        /// </summary>
+        public static string AccessCode_Invalid {
+            get {
+                return ResourceManager.GetString("AccessCode_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Access code must be between {2} and {1} characters.
         /// </summary>
         public static string AccessCode_Length {
