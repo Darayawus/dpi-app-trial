@@ -12,7 +12,7 @@ namespace PrintBucket.AWS.Services
     public class ImageService : IImageService
     {
         private readonly IAmazonDynamoDB _dynamoDb;
-        private const string _tableName = "dpi_files";
+        private const string _tableName = "dpi_bucket";
 
         public ImageService(IAmazonDynamoDB dynamoDb)
         {
