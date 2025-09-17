@@ -18,7 +18,7 @@ Repository layout
 - `src/PrintBucket.Models` — shared models (Bucket, ImageRecord).
 - `src/PrintBucket.Common` — common utilities (logging, etc.).
 - `src/PrintBucket.Tests` — unit / integration tests.
-- `packaging/`, `tools/`, `doc/` — delivery and tooling files.
+- `packaging/`, `tools/`, `docs/` — delivery and tooling files.
 
 Requirements
 ------------
@@ -104,6 +104,7 @@ How it works
 - On push to `main` and on pull requests the pipeline restores, builds and runs tests for all projects.
 - After a successful pipeline the CI server may be notified to run further steps (packaging, deployment).
 - CI secrets (tokens or webhook URLs) must be stored in your CI provider.
+- CI version number is shown in the footer of the Web UI.
 
 
 Deployment notes
@@ -114,7 +115,6 @@ Deployment notes
 Operational notes
 -----------------
 - Install native `libvips` on hosts used for image processing.
-- Prefer bucket policies or CloudFront over object ACLs for public access.
 - Serilog is configured in `PrintBucket.Common.Logging`; adjust sinks as needed.
 
 
