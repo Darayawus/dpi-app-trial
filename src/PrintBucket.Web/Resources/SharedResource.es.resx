@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value></resheader>
+
+  <!-- Spanish -->
+  <data name="HomeTitle" xml:space="preserve"><value>Página principal</value></data>
+  <data name="HeroHeadline" xml:space="preserve"><value>Tu álbum privado de fotos — rápido, seguro y fácil de compartir</value></data>
+  <data name="HeroSubhead" xml:space="preserve"><value>Crea tu espacio personalizado en segundos: sube fotos, organiza álbumes, comparte con un código QR y solicita impresiones profesionales cuando quieras</value></data>
+  <data name="HeroBenefits" xml:space="preserve"><value>Privado · Seguro · Fácil de compartir</value></data>
+  <data name="Start" xml:space="preserve"><value>Crear mi espacio</value></data>
+  <data name="ImageAlt" xml:space="preserve"><value>Imagen principal de PrintBucket</value></data>
+  <data name="QRCodeNote" xml:space="preserve"><value>Comparte al instante con código QR</value></data>
+  <data name="PrintsNote" xml:space="preserve"><value>Solicita impresiones de alta calidad</value></data>
+  <data name="NavCreate" xml:space="preserve"><value>Crear tu espacio</value></data>
+  <data name="NavAccess" xml:space="preserve"><value>Acceder a tu espacio</value></data>
+</root>

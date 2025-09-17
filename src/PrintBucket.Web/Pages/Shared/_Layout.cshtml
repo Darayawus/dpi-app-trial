@@ -1,5 +1,7 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using PrintBucket.Web
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
+<!DOCTYPE html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,11 +23,38 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">                        
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Create">@L["NavCreate"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Access">@L["NavAccess"]</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <!-- Selector de idiomas -->
+                    <div class="nav-item dropdown language-selector">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="fi fi-@(System.Globalization.CultureInfo.CurrentUICulture.Name.ToLower())"></span>
+                            @System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToUpper()
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                            <li>
+                                <a class="dropdown-item @(System.Globalization.CultureInfo.CurrentUICulture.Name == "es-ES" ? "active" : "")" 
+                                   href="?culture=es-ES" lang="es">
+                                    <span class="fi fi-es me-2"></span> Español
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item @(System.Globalization.CultureInfo.CurrentUICulture.Name == "en-US" ? "active" : "")" 
+                                   href="?culture=en-US" lang="en">
+                                    <span class="fi fi-us me-2"></span> English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -38,7 +67,7 @@
     </div>
 
     <footer class="footer text-muted mt-auto">
-        <div class="text-end pe-4">
+        <div class="container text-end pe-4">
             &copy; 2025 - Print Bucket - <a href="https://darioparres.com" target="_blank" rel="noopener noreferrer">darioparres.com</a>
         </div>
     </footer>

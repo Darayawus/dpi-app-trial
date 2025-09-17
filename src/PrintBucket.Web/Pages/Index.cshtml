@@ -1,31 +1,66 @@
 ﻿@page
 @model IndexModel
-@inject Microsoft.Extensions.Localization.IStringLocalizer<PrintBucket.Web.SharedResource> L
+@using PrintBucket.Web
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 @{
     ViewData["Title"] = L["HomeTitle"];
 }
 
 <div class="full-bleed full-viewport index-hero">
-    <div class="text-center">
-        <img src="~/img/index_img.png" alt="@L["ImageAlt"]" class="img-fluid mb-4" />
-        <p><a class="btn-start" href="@Url.Page("/Privacy")">@L["Start"]</a></p>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8 text-center">
+                <!-- Imagen hero con mejor respuesta en móviles -->
+                <div class="hero-image-wrapper mb-5">
+                    <img src="~/img/index_img.png" alt="@L["ImageAlt"]" class="img-fluid" />
+                </div>
+
+                <!-- Contenido principal con mejor espaciado y jerarquía -->
+                <div class="hero-content">
+                    <h1 class="display-4 fw-bold mb-4">@L["HeroHeadline"]</h1>
+                    
+                    <p class="lead mb-4">
+                        @L["HeroSubhead"]
+                    </p>
+
+                    <!-- Benefits con mejor separación visual -->
+                    <div class="benefits-wrapper mb-5">
+                        <p class="text-secondary">
+                            <span class="benefit-item">@L["HeroBenefits"]</span>
+                            <span class="separator mx-2">•</span>
+                            <span class="benefit-item">@L["QRCodeNote"]</span>
+                            <span class="separator mx-2">•</span>
+                            <span class="benefit-item">@L["PrintsNote"]</span>
+                        </p>
+                    </div>
+
+                    <!-- CTA más prominente -->
+                    <div class="cta-wrapper">
+                        <a class="btn-start btn-lg" 
+                           href="@Url.Page("/Privacy")" 
+                           role="button" 
+                           aria-label="@L["Start"]">
+                            @L["Start"]
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 @section Scripts {
-<script>
-(function() {
-    var seconds = 10;
-    var el = document.getElementById('count');
-    var targetUrl = '@Url.Page("/Privacy")';
-    var timer = setInterval(function() {
-        seconds--;
-        if (el) el.textContent = seconds;
-        if (seconds <= 0) {
-            clearInterval(timer);
-            //window.location.href = targetUrl;
-        }
-    }, 1000);
-})();
-</script>
+    <script>
+        (function() {
+            var seconds = 10;
+            var targetUrl = '@Url.Page("/Privacy")';
+            var timer = setInterval(function() {
+                seconds--;
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    //window.location.href = targetUrl;
+                }
+            }, 1000);
+        })();
+    </script>
 }

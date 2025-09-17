@@ -1,0 +1,31 @@
+@page
+@{
+    ViewData["Title"] = "Bienvenido";
+}
+
+<div class="d-flex align-items-center justify-content-center" style="height: calc(100vh - 120px);">
+    <div class="text-center">
+        <h1 class="display-4">PrintBucket</h1>
+        <p class="lead">Bienvenido — serás redirigido en <span id="count">5</span> segundos.</p>
+        <p><a class="btn btn-primary" asp-page="/Index">Ir ahora</a></p>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    (function(){
+        var seconds = 5;
+        var el = document.getElementById('count');
+        // Navegar a la raíz indicando skipSplash=1 para evitar el middleware de redirección
+        var url = '@Url.Page("/Index", new { skipSplash = "1" })';
+        var t = setInterval(function(){
+            seconds--;
+            if (el) el.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(t);
+                window.location.href = url;
+            }
+        }, 1000);
+    })();
+</script>
+}

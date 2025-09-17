@@ -3,7 +3,7 @@ using Serilog;
 using Prometheus;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.Options;
+using PrintBucket.Web.Resources;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,50 +11,54 @@ var builder = WebApplication.CreateBuilder(args);
 SerilogLogger.Initialize();
 builder.Host.UseSerilog();
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-// Add Controllers
-builder.Services.AddControllers();
-
-// Localización: indicar carpeta Resources
+// Localización: configurar antes que otros servicios
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("es") };
-
+// Configurar servicios de localización
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    options.DefaultRequestCulture = new RequestCulture("en");
-    options.SupportedCultures = supportedCultures;
-    options.SupportedUICultures = supportedCultures;
+    var supportedCultures = new[] { "es", "en" };
+    options.SetDefaultCulture(supportedCultures[0])
+        .AddSupportedCultures(supportedCultures)
+        .AddSupportedUICultures(supportedCultures);
+    
+    options.FallBackToParentCultures = true;
+    options.FallBackToParentUICultures = true;
 });
 
+// Add services to the container.
+builder.Services.AddRazorPages()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization(options => {
+        options.DataAnnotationLocalizerProvider = (type, factory) =>
+            factory.Create(typeof(SharedResource));
+    });
+
+//Add Controllers
+builder.Services.AddControllers();
+
 var app = builder.Build();
+
+// Configurar localización ANTES de otros middleware
+app.UseRequestLocalization();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
-// Use prometheus middleware 
-//TODO: this is a trial, no protection here right now
+//TODO: Prometheus protect
 app.UseHttpMetrics();
 app.MapMetrics();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
-// Activar middleware de localización usando la configuración registrada
-var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
-app.UseRequestLocalization(locOptions);
-
 app.UseAuthorization();
 
 app.MapRazorPages();
-app.MapControllers(); // Mapear controladores
+app.MapControllers();
 
 app.Run();
