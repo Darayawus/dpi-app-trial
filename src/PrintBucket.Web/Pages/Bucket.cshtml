@@ -1,7 +1,9 @@
 @page "{id}"
 @model PrintBucket.Web.Pages.BucketModel
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 @{
+    var s3Base = $"https://dpi-dev-bucket.s3.amazonaws.com";
     ViewData["Title"] = L["BucketViewTitle"];
 }
 
@@ -18,14 +20,16 @@
                         {
                             <div class="col-12 col-md-6 col-lg-4">
                                 <div class="card h-100">
-                                    <img src="@image.SmallKey" class="card-img-top" alt="@image.FileName" loading="lazy" />
+                                    <img src="@(string.IsNullOrEmpty(s3Base) ? Uri.EscapeUriString(image.SmallKey ?? string.Empty) : $"{s3Base}/{Uri.EscapeDataString(image.SmallKey ?? string.Empty)}")"
+                                         class="card-img-top" alt="@image.FileName" loading="lazy" />
                                     <div class="card-body">
                                         <h5 class="card-title text-truncate">@image.FileName</h5>
                                         <p class="card-text small text-muted">
                                             @image.CreatedAt.ToLocalTime().ToString("g")
                                         </p>
                                         <div class="btn-group">
-                                            <a href="@image.OriginalKey" class="btn btn-sm btn-outline-primary" target="_blank">
+                                            <a href="@(string.IsNullOrEmpty(s3Base) ? Uri.EscapeUriString(image.OriginalKey ?? string.Empty) : $"{s3Base}/{Uri.EscapeDataString(image.OriginalKey ?? string.Empty)}")"
+                                               class="btn btn-sm btn-outline-primary" target="_blank">
                                                 <i class="bi bi-download"></i> @L["Download"]
                                             </a>
                                         </div>

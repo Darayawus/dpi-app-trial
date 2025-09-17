@@ -64,6 +64,9 @@ namespace PrintBucket.AWS.Services
             var result = new List<ImageRecord>();
             foreach (var item in response.Items)
             {
+                if (!item.ContainsKey("contentType"))
+                    continue;
+
                 var record = new ImageRecord
                 {
                     Id = item.ContainsKey("range_key") ? item["range_key"].S : (item.ContainsKey("id") ? item["id"].S : string.Empty),
