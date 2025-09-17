@@ -1,40 +1,77 @@
-﻿@page
-@using PrintBucket.Web
-@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
-@{
-    ViewData["Title"] = L["Privacy_Title"];
-}
-<h1>@ViewData["Title"]</h1>
+﻿    @page
+    @using PrintBucket.Web
+    @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
+    @{
+        ViewData["Title"] = L["Privacy_Title"];
+    }
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                    <h1 class="mb-3 display-6">
+                        @ViewData["Title"]</h1>
 
-@Html.Raw(L["Privacy_Intro"])
+                        <div class="mb-4">
+                            @Html.Raw(L["Privacy_Intro"])
+                        </div>
 
-<h2>@L["Privacy_DataCollectedTitle"]</h2>
-<ul>
-    <li>@L["Privacy_DataCollected_Usage"]</li>
-    <li>@L["Privacy_DataCollected_FileUploads"]</li>
-    <li>@L["Privacy_DataCollected_Diagnostics"]</li>
-</ul>
+                        <section class="mb-4">
+                            <h6 class="mb-2 fw-bold">@L["Privacy_DataCollectedTitle"]</h6>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">@L["Privacy_DataCollected_Usage"]</li>
+                                <li class="list-group-item">@L["Privacy_DataCollected_FileUploads"]</li>
+                                <li class="list-group-item">@L["Privacy_DataCollected_Diagnostics"]</li>
+                            </ul>
+                        </section>
 
-<h2>@L["Privacy_HowWeUseTitle"]</h2>
-<p>@L["Privacy_HowWeUse"]</p>
+                        <section class="row g-3 mb-4">
+                            <div class="col-md-6">
+                            <h6 class="mb-2 fw-bold">@L["Privacy_HowWeUseTitle"]</h6>
+                                <p class="mb-0">@L["Privacy_HowWeUse"]</p>
+                            </div>
+                            <div class="col-md-6">
+                            <h6 class="mb-2 fw-bold">@L["Privacy_ThirdPartiesTitle"]</h6>
+                                <p class="mb-0">@L["Privacy_ThirdParties"]</p>
+                            </div>
+                        </section>
 
-<h2>@L["Privacy_ThirdPartiesTitle"]</h2>
-<p>@L["Privacy_ThirdParties"]</p>
+                        <section class="row g-3 mb-4">
+                            <div class="col-md-6">
+                            <h6 class="mb-2 fw-bold">@L["Privacy_RetentionTitle"]</h6>
+                                <p class="mb-0">@L["Privacy_Retention"]</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="mb-2 fw-bold">@L["Privacy_SecurityTitle"]</h6>
+                                <p class="mb-0">@L["Privacy_Security"]</p>
+                            </div>
+                        </section>
 
-<h2>@L["Privacy_RetentionTitle"]</h2>
-<p>@L["Privacy_Retention"]</p>
+                        <section class="mb-4">
+                        <h6 class="mb-2 fw-bold">@L["Privacy_YourRightsTitle"]</h6>
+                            <p class="mb-0">@L["Privacy_YourRights"]</p>
+                        </section>
 
-<h2>@L["Privacy_SecurityTitle"]</h2>
-<p>@L["Privacy_Security"]</p>
+                        <section class="mb-4">
+                        <h6 class="mb-2 fw-bold">@L["Privacy_ChildrenTitle"]</h6>
+                            <p class="mb-0">@L["Privacy_Children"]</p>
+                        </section>
 
-<h2>@L["Privacy_YourRightsTitle"]</h2>
-<p>@L["Privacy_YourRights"]</p>
+                        <section class="mb-4">
+                        <h6 class="mb-2 fw-bold">@L["Privacy_ChangesTitle"]</h6>
+                            <p class="mb-0">@L["Privacy_Changes"]</p>
+                        </section>
 
-<h2>@L["Privacy_ChildrenTitle"]</h2>
-<p>@L["Privacy_Children"]</p>
-
-<h2>@L["Privacy_ChangesTitle"]</h2>
-<p>@L["Privacy_Changes"]</p>
-
-<h2>@L["Privacy_ContactTitle"]</h2>
-<p>@L["Privacy_Contact"]</p>
+                        <section class="mb-0">
+                        <h6 class="mb-2 fw-bold">@L["Privacy_ContactTitle"]</h6>
+                            <p class="mb-0">@L["Privacy_Contact"]</p>
+                        </section>
+                    </div>
+                    <div class="card-footer text-muted small">
+                        @* Optional: display last updated date or version *@
+                        @L["Privacy_Changes"]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
