@@ -1,95 +1,121 @@
 # PrintBucket
 
-## Project Layout
+Summary
+-------
+PrintBucket is an application composed of a Razor Pages UI (`PrintBucket.Web`), a REST API (`PrintBucket.Api`) and AWS helper libraries (`PrintBucket.AWS`). 
+It lets users create logical buckets, upload images (multiple versions) to S3 and store metadata in DynamoDB.
 
-	|-/				root folder
-    |-certs/        certificates folder
-    |-doc/          documentation folder
-    |-node_modules/
-    |-packaging     installers folder
-    |-src           source code folder    
-    |-tools         multiple tools folder    
-    
-## Requisites
+Demo
+----
+- Web UI: https://printbucket.darioparres.com
+- API: https://printbucket.darioparres.com/api
 
-NodeJS npm 
+Repository layout
+-----------------
+- `src/PrintBucket.Web` — Razor Pages frontend.
+- `src/PrintBucket.Api` — REST API (upload, buckets, endpoints).
+- `src/PrintBucket.AWS` — AWS services (S3, DynamoDB, utilities).
+- `src/PrintBucket.Models` — shared models (Bucket, ImageRecord).
+- `src/PrintBucket.Common` — common utilities (logging, etc.).
+- `src/PrintBucket.Tests` — unit / integration tests.
+- `packaging/`, `tools/`, `doc/` — delivery and tooling files.
 
-* run npm install in root folder / npm ci
-* npm install -g grunt-cli in root folder
+Requirements
+------------
+- .NET 8 SDK
+- Native `libvips` (required by `NetVips`) for image processing
+- AWS credentials (profile, environment variables or IAM role)
 
-Visual Studio .NET Framework development environment (C#)
+Local setup
+-----------
+1. Clone and restore:
+   - `git clone <repo>`
+   - `dotnet restore`
+2. AWS credentials:
+   - Use `~/.aws/credentials` profile or environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`.
+   - Optionally set `AWS:Profile` in `PrintBucket.Api/appsettings.Development.json`.
+3. Configuration:
+   - Set S3 and DynamoDB table names in `appsettings.Development.json`:
 
-## Packaging
+4. DynamoDB:
+   - Create `dpi_bucket` (partition `hash_key`, sort `range_key`) or adapt `BucketService`.
+   - Create `dpi_files` (e.g. partition `bucketId`, sort `id`) or adapt `ImageService`.
 
-### Licenses
+Run locally
+-----------
+- From IDE: use the launch profile in `Properties/launchSettings.json`.
+- From terminal:
+  - API: `dotnet run --project src/PrintBucket.Api`
+  - Web: `dotnet run --project src/PrintBucket.Web`
 
-Working folder:
-
-    |-packaging/licenses 
-        
-Steps to create a license for a Printspot Site
-
-* Create the folder structure for the Printspot site ID inside the working folder.
-
-        |-packaging/licenses/siteID/
-        |-packaging/licenses/siteID/files
-        |-packaging/licenses/siteID/files/kiosk            
-        |-packaging/licenses/siteID/files/ProductionCenter
-        |-packaging/licenses/siteID/nsis    
-
-#### packaging/licenses/siteID/files/kiosk
-
-This folder contains the configuration files for the PPM folder. Create a config folder and put inside the Settings.xml encrypted file
-
-In order to edit the Settings.xml folder you need to use tools\windows\EncryptDecryptFileTool and change the following values
-
-    PrintSpotApiUsername
-    PrintSpotApiPassword
-    SiteId
-
-*IMPORTANT: If the Settings.xml file is from another client, check the section Host username and Host Password because it includes sensible information
-about the updates folder and can generate a major issue if two clients share the same update folder*
-
-#### packaging/licenses/siteID/files/ProductionCenter
-
-*Skip this step if the kiosk doesn't need a Production Center configuration.* 
-
-This folder contains the configurations files for the ProductionCenter application. Copy the config.json file inside this folder
-
-*IMPORTANT: ProductionCenter requires an encrypted services user. In order to generate an user use the tool
- tools\windows\Tools.License.Console*
-
-#### packaging/licenses/siteID/files/nsis
-
-Copy nsis from another folder and change the following parameters 
-
-* NAME Pattern: "Site_ID_Config"
-
-* OUT_DIR Pattern:  ".\..\..\deploy\{client}\licenses\" 
-File will be uploaded to applications.imaxel.com/imaxel-kiosk/customers/{client}/{licenses} s3 bucket
-
-* INSTALLATION_DIR Change to PPM (Kiosk) installation folder 
-        
-##Tools
-
-###tools\windows\Tools.License.Console 
-
-Requires two arguments:
-* SiteID
-* Permissions (underscore concatenaded strings)
-
-Returns user login name for services.imaxel.com (change the text after @ to control the users that belong to an specific customer for grouping purposes) 
-
-Usual permissions values:
-* folder_printer -> Enables folder and printer output in production center.
-
-* folder_plugin_fuji -> Enables folder and plugin output.
-Fuji plugin is enabled (specific plugin permissions not yet implemented in Production Center but it's better if the user is created with the plugin permissions).
-
-* folder -> Only folder output is enabled in production center.    
-
-*Important: Remember to create the user in services.imaxel.com and setup the distribution rule to redirect the orders to this new user*
+Tests
+-----
+- Run tests: `dotnet test`
 
 
-      
+API Documentation & Monitoring
+----------------------------
+
+### Swagger
+The API includes Swagger/OpenAPI documentation, available in development mode at:
+- https://localhost:5000/swagger (when running locally)
+
+### Metrics
+Both the Web UI and API expose Prometheus-compatible metrics endpoints:
+
+- Web UI metrics: 
+  - Local: http://localhost:5000/metrics
+  - Production: https://printbucket.darioparres.com/metrics
+
+- API metrics:
+  - Local: http://localhost:5003/metrics
+  - Production: https://printbucket.darioparres.com/api/metrics
+
+Available metrics include:
+- HTTP request duration
+- Request counts by endpoint
+- Response status codes
+- Active connections
+- Runtime metrics (GC, thread pool, etc.)
+
+These endpoints can be scraped by Prometheus and visualized using Grafana dashboards.
+
+## Continuous Integration (CI)
+
+We use an automated CI pipeline to build, test and produce artifacts for PrintBucket. The canonical CI server for this repository is:
+
+https://buildserver.parresibarra.com
+
+### TeamCity Environment
+
+Project Overview:
+![TeamCity Projects](docs/img/teamcity_01.png)
+
+Build Configuration:
+![Build Steps](docs/img/teamcity_02.png)
+
+Build Steps Detail:
+![Build Configuration](docs/img/teamcity_03.png)
+
+Build History and Artifacts:
+![Build History](docs/img/teamcity_04.png)
+
+How it works
+- On push to `main` and on pull requests the pipeline restores, builds and runs tests for all projects.
+- After a successful pipeline the CI server may be notified to run further steps (packaging, deployment).
+- CI secrets (tokens or webhook URLs) must be stored in your CI provider.
+
+
+Deployment notes
+----------------
+- Configure S3 bucket policies for public access. Avoid relying on ACLs if bucket has ACLs disabled.
+- Store AWS credentials securely in CI/CD (secrets manager / env vars).
+
+Operational notes
+-----------------
+- Install native `libvips` on hosts used for image processing.
+- Prefer bucket policies or CloudFront over object ACLs for public access.
+- Serilog is configured in `PrintBucket.Common.Logging`; adjust sinks as needed.
+
+
 

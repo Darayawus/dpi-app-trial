@@ -53,7 +53,7 @@ logs/
 
 # --- Frontend (if present)
 node_modules/
-dist/
+#dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
