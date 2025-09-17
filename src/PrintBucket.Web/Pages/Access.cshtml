@@ -17,7 +17,7 @@
                         <div class="card-body">
                             <h5 class="card-title mb-3">@L["AccessQRTitle"]</h5>
                             <p class="card-text">@L["AccessQRDescription"]</p>
-                            <button class="btn btn-primary" id="scanQRBtn" type="button">
+                            <button class="btn btn-primary btn-app" id="scanQRBtn" type="button">
                                 <i class="bi bi-qr-code-scan me-2"></i>@L["ScanQRButton"]
                             </button>
                         </div>
@@ -37,13 +37,16 @@
                                 </div>
                             }
 
-                            <form method="post" class="needs-validation" novalidate>
+                            <form id="accessForm" method="post" class="needs-validation" novalidate>
                                 <div class="mb-3">
                                     <label asp-for="Input.AccessCode" class="form-label">@L["AccessCodeLabel"]</label>
                                     <input asp-for="Input.AccessCode" class="form-control form-control-lg" required />
                                     <span asp-validation-for="Input.AccessCode" class="text-danger"></span>
                                 </div>
-                                <button type="submit" class="btn btn-primary">@L["AccessButton"]</button>
+                                <button id="accessSubmit" type="submit" class="btn btn-primary d-inline-flex align-items-center btn-app">
+                                    <span id="accessSpinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+                                    <span id="accessBtnText">@L["AccessButton"]</span>
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -178,6 +181,29 @@
                     modal.hide();
                 }
             });
+
+        // --- Spinner for access submit button ---
+            const accessForm = document.getElementById('accessForm');
+            const accessSubmit = document.getElementById('accessSubmit');
+            const accessSpinner = document.getElementById('accessSpinner');
+
+            if (accessForm && accessSubmit && accessSpinner) {
+                accessForm.addEventListener('submit', function (e) {
+                    // Solo mostrar spinner si el formulario es válido
+                    if (this.checkValidity()) {
+                        accessSpinner.classList.remove('d-none');
+                        accessSubmit.setAttribute('disabled', 'disabled');
+                    }
+                });
+
+                // Ocultar spinner si hay errores después de postback
+                document.addEventListener('DOMContentLoaded', function () {
+                    if (document.querySelector('.validation-summary-errors, .field-validation-error, .alert-danger')) {
+                        accessSpinner.classList.add('d-none');
+                        accessSubmit.removeAttribute('disabled');
+                    }
+                });
+            }
         })();
     </script>
 }

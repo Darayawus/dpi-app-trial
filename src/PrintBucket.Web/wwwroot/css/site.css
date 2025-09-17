@@ -58,8 +58,8 @@ body {
   }
 }
 
-/* Botón Start personalizado */
-.btn-start, .btn-access {
+/* Botón personalizado */
+.btn-start, .btn-access, .btn-app {
     padding: 0.75rem 1.5rem;
     font-size: 1.05rem;
     border-radius: 0.5rem;
@@ -73,24 +73,27 @@ body {
 }
 
 /* Estados interactivos */
-    .btn-start:hover,
-    .btn-start:focus,
-    .btn-access:hover,
-    .btn-access:focus {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 26px rgba(2, 132, 199, 0.24);
-        background: linear-gradient(180deg, #0b5ed7, #084298);
-        color: #fff;
-    }
+.btn-start:hover,
+.btn-start:focus,
+.btn-access:hover,
+.btn-access:focus,
+.btn-app:hover,
+.btn-app:focus
+{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(2, 132, 199, 0.24);
+    background: linear-gradient(180deg, #0b5ed7, #084298);
+    color: #fff;
+}
 
-.btn-start:active, .btn-access:active {
+.btn-start:active, .btn-access:active, .btn-app:active {
   transform: translateY(0);
   box-shadow: 0 6px 18px rgba(2, 132, 199, 0.18);
 }
 
 /* Si necesitas que el botón ocupe toda la anchura en móviles */
 @media (max-width: 576px) {
-  .btn-start, .btn-access {
+  .btn-start, .btn-access, .btn-app {
     width: 90%;
     display: block;
     margin: 0.5rem auto 0;
