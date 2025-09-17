@@ -1,21 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.Extensions.Localization;
 
 namespace PrintBucket.Web.Pages
 {
     public class AccessModel : PageModel
     {
         private readonly ILogger<AccessModel> _logger;
-        private readonly IStringLocalizer<SharedResource> _localizer;
+        private readonly HttpClient _httpClient;
 
         public AccessModel(
             ILogger<AccessModel> logger,
-            IStringLocalizer<SharedResource> localizer)
+            IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
-            _localizer = localizer;
+            _httpClient = httpClientFactory.CreateClient("PrintBucketApi");
         }
 
         [BindProperty]
@@ -30,15 +29,29 @@ namespace PrintBucket.Web.Pages
             public string AccessCode { get; set; } = string.Empty;
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
+                return Page();
+
+            try
             {
+                var response = await _httpClient.GetAsync($"api/buckets/access/{Input.AccessCode}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var bucket = await response.Content.ReadFromJsonAsync<PrintBucket.Models.Bucket>();
+                    return RedirectToPage("/Bucket", new { id = bucket?.Id });
+                }
+                
+                ModelState.AddModelError(string.Empty, "Invalid access code");
                 return Page();
             }
-
-            _logger.LogInformation("Access attempt with code: {Code}", Input.AccessCode);
-            return RedirectToPage("/Index");
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error validating access code");
+                ModelState.AddModelError(string.Empty, "An error occurred. Please try again later.");
+                return Page();
+            }
         }
     }
 }

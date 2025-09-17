@@ -36,6 +36,10 @@ builder.Services.AddRazorPages()
 
 //Add Controllers
 builder.Services.AddControllers();
+builder.Services.AddHttpClient("PrintBucketApi", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ApiBaseUrl"] ?? "https://localhost:5003/");
+});
 
 var app = builder.Build();
 

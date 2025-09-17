@@ -1,0 +1,66 @@
+@page "{id}"
+@model PrintBucket.Web.Pages.BucketModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["BucketViewTitle"];
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12">
+            @if (Model.Bucket != null)
+            {
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h1 class="display-6 mb-0">@Model.Bucket.Name</h1>
+                            <span class="badge bg-primary">@Model.Bucket.Status</span>
+                        </div>
+                        <p class="text-muted">
+                            <i class="bi bi-calendar3"></i> @L["CreatedAt"]: @Model.Bucket.CreatedAt.ToLocalTime().ToString("g")
+                        </p>
+                    </div>
+                </div>
+
+                @if (Model.Images?.Any() == true)
+                {
+                    <div class="row g-4">
+                        @foreach (var image in Model.Images)
+                        {
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="card h-100">
+                                    <img src="@image.SmallKey" class="card-img-top" alt="@image.FileName" loading="lazy" />
+                                    <div class="card-body">
+                                        <h5 class="card-title text-truncate">@image.FileName</h5>
+                                        <p class="card-text small text-muted">
+                                            @image.CreatedAt.ToLocalTime().ToString("g")
+                                        </p>
+                                        <div class="btn-group">
+                                            <a href="@image.OriginalKey" class="btn btn-sm btn-outline-primary" target="_blank">
+                                                <i class="bi bi-download"></i> @L["Download"]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-5">
+                        <p class="text-muted">@L["NoImages"]</p>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <h2>@L["BucketNotFound"]</h2>
+                    <p class="text-muted">@L["BucketNotFoundDesc"]</p>
+                    <a href="@Url.Page("/Index")" class="btn btn-primary">@L["BackHome"]</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
