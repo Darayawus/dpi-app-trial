@@ -22,9 +22,9 @@ namespace PrintBucket.AWS.Services
         public async Task<ImageRecord> AddImageAsync(ImageRecord record)
         {
             var item = new Dictionary<string, AttributeValue>
-            {
-                { "bucketId", new AttributeValue { S = record.BucketId } },
-                { "id", new AttributeValue { S = record.Id } },
+            {                    
+                { "hash_key", new AttributeValue { S = record.BucketId } },
+                { "range_key", new AttributeValue { S = record.Id } },
                 { "originalKey", new AttributeValue { S = record.OriginalKey } },
                 { "largeKey", new AttributeValue { S = record.LargeKey } },
                 { "smallKey", new AttributeValue { S = record.SmallKey } },
