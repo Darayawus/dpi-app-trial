@@ -34,7 +34,7 @@ namespace PrintBucket.AWS.Services
                 var originalKey = $"{baseKey}";
                 using (var originalStream = new MemoryStream())
                 {
-                    image.WriteToStream(originalStream, ".jpg");
+                    image.WriteToStream(originalStream, extension);
                     originalStream.Position = 0;
                     await UploadToS3(bucketName, originalStream, originalKey);
                     uploadedUrls.Add(originalKey);
@@ -42,21 +42,22 @@ namespace PrintBucket.AWS.Services
 
                 // Version 1024x1024
                 var large = ResizeImage(image, 1024);
-                var largeKey = $"{baseKey}.{LARGE_SUFFIX}";
+                var largeKey = $"{bucketId}/s/{Path.GetFileNameWithoutExtension(Guid.NewGuid().ToString())}{extension}";
                 using (var largeStream = new MemoryStream())
                 {
-                    large.WriteToStream(largeStream, ".jpg");
+                    large.WriteToStream(largeStream, extension);
                     largeStream.Position = 0;
                     await UploadToS3(bucketName, largeStream, largeKey);
                     uploadedUrls.Add(largeKey);
                 }
 
                 // Version 400x400
-                var small = ResizeImage(image, 400);
-                var smallKey = $"{baseKey}.{SMALL_SUFFIX}";
+                var small = ResizeImage(image, 400);                
+                var smallKey = $"{bucketId}/t/{Path.GetFileNameWithoutExtension(Guid.NewGuid().ToString())}{extension}";
+
                 using (var smallStream = new MemoryStream())
                 {
-                    small.WriteToStream(smallStream, ".jpg");
+                    small.WriteToStream(smallStream, extension);
                     smallStream.Position = 0;
                     await UploadToS3(bucketName, smallStream, smallKey);
                     uploadedUrls.Add(smallKey);

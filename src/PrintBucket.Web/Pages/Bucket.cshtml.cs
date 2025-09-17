@@ -1,7 +1,9 @@
+using System.IO;
+using System.Linq;
+using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PrintBucket.Models;
-using System.Net.Http.Headers;
 
 namespace PrintBucket.Web.Pages
 {
@@ -65,15 +67,25 @@ namespace PrintBucket.Web.Pages
                 return Page();
             }
 
+            var allowedExt = new[] { ".jpg", ".jpeg" };
+
             try
             {
-                // ImagesController expects a single file per POST to: POST /images/upload/{bucketId}
                 foreach (var file in Files)
                 {
+                    var ext = Path.GetExtension(file.FileName)?.ToLowerInvariant() ?? string.Empty;
+                    var contentType = file.ContentType ?? string.Empty;
+
+                    if (!allowedExt.Contains(ext) || !(contentType.Equals("image/jpeg", StringComparison.OrdinalIgnoreCase) || contentType.Equals("image/jpg", StringComparison.OrdinalIgnoreCase)))
+                    {
+                        ModelState.AddModelError(string.Empty, $"File '{file.FileName}' is not a JPG image.");
+                        return Page();
+                    }
+
                     using var content = new MultipartFormDataContent();
                     using var stream = file.OpenReadStream();
                     var streamContent = new StreamContent(stream);
-                    streamContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType ?? "application/octet-stream");
+                    streamContent.Headers.ContentType = new MediaTypeHeaderValue(contentType ?? "image/jpeg");
                     content.Add(streamContent, "file", file.FileName);
 
                     var response = await _httpClient.PostAsync($"images/upload/{id}", content);
@@ -83,17 +95,12 @@ namespace PrintBucket.Web.Pages
                         var body = await response.Content.ReadAsStringAsync();
                         _logger.LogError("Upload failed for {File} to bucket {BucketId}: {Status} {Body}", file.FileName, id, response.StatusCode, body);
                         ModelState.AddModelError(string.Empty, $"Upload failed for {file.FileName}: {response.StatusCode}");
+                        return Page();
                     }
-                    else
-                    {
-                        _logger.LogInformation("Uploaded {File} to bucket {BucketId}", file.FileName, id);
-                    }
+
+                    _logger.LogInformation("Uploaded {File} to bucket {BucketId}", file.FileName, id);
                 }
 
-                if (!ModelState.IsValid)
-                    return Page();
-
-                // Reload page to show updated images
                 return RedirectToPage(new { id });
             }
             catch (Exception ex)

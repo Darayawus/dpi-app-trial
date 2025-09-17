@@ -56,7 +56,7 @@
                             <!-- Upload button on the right -->
                             <div class="col-3 text-end">
                                 <form method="post" enctype="multipart/form-data" asp-page-handler="Upload" asp-route-id="@Model.Bucket.Id">
-                                    <input type="file" id="fileInput" name="files" multiple class="d-none" />
+                                    <input type="file" id="fileInput" name="files" multiple accept=".jpg,.jpeg,image/jpeg" class="d-none" />
                                     
                                     <div class="d-inline-flex flex-column align-items-center">
                                         <label for="fileInput" class="rounded-circle shadow-lg d-inline-flex align-items-center justify-content-center"
