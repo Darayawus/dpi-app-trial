@@ -1,4 +1,5 @@
 ﻿@using PrintBucket.Web
+@using PrintBucket.Web.Helpers
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
 <!DOCTYPE html>
 <html lang="@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
@@ -68,7 +69,7 @@
 
     <footer class="footer text-muted mt-auto">
         <div class="container text-end pe-4">
-            &copy; 2025 - Print Bucket - <a href="https://darioparres.com" target="_blank" rel="noopener noreferrer">darioparres.com</a>
+            &copy; 2025 - Print Bucket - v@AssemblyInfo.Version - <a href="https://darioparres.com" target="_blank" rel="noopener noreferrer">darioparres.com</a>
         </div>
     </footer>
 
