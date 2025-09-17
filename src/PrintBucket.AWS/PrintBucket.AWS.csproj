@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PrintBucket.Common\PrintBucket.Common.csproj" />
+    <ProjectReference Include="..\PrintBucket.Graphics\PrintBucket.Graphics.csproj" />
     <ProjectReference Include="..\PrintBucket.Models\PrintBucket.Models.csproj" />
   </ItemGroup>
 

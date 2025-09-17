@@ -61,6 +61,105 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a I accept the terms and conditions.
+        /// </summary>
+        public static string AcceptTerms {
+            get {
+                return ResourceManager.GetString("AcceptTerms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Access.
+        /// </summary>
+        public static string AccessButton {
+            get {
+                return ResourceManager.GetString("AccessButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Access code.
+        /// </summary>
+        public static string AccessCodeLabel {
+            get {
+                return ResourceManager.GetString("AccessCodeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Use access code.
+        /// </summary>
+        public static string AccessCodeTitle {
+            get {
+                return ResourceManager.GetString("AccessCodeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Use your device&apos;s camera to scan your space&apos;s QR code.
+        /// </summary>
+        public static string AccessQRDescription {
+            get {
+                return ResourceManager.GetString("AccessQRDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Scan QR code.
+        /// </summary>
+        public static string AccessQRTitle {
+            get {
+                return ResourceManager.GetString("AccessQRTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Access your space.
+        /// </summary>
+        public static string AccessTitle {
+            get {
+                return ResourceManager.GetString("AccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Create space.
+        /// </summary>
+        public static string CreateButton {
+            get {
+                return ResourceManager.GetString("CreateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Create your personalized space.
+        /// </summary>
+        public static string CreateTitle {
+            get {
+                return ResourceManager.GetString("CreateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We&apos;ll send you an access code to this email.
+        /// </summary>
+        public static string EmailHelp {
+            get {
+                return ResourceManager.GetString("EmailHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email address.
+        /// </summary>
+        public static string EmailLabel {
+            get {
+                return ResourceManager.GetString("EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Private · Secure · Easy to share.
         /// </summary>
         public static string HeroBenefits {
@@ -79,7 +178,7 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Create a personalized space in seconds: upload photos, organize albums, share with a QR code and order professional prints anytime..
+        ///   Busca una cadena traducida similar a Create a personalized space in seconds: upload photos, organize albums, share with a QR code and order professional prints anytime.
         /// </summary>
         public static string HeroSubhead {
             get {
@@ -102,6 +201,15 @@ namespace PrintBucket.Web.Resources {
         public static string ImageAlt {
             get {
                 return ResourceManager.GetString("ImageAlt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Name.
+        /// </summary>
+        public static string NameLabel {
+            get {
+                return ResourceManager.GetString("NameLabel", resourceCulture);
             }
         }
         
@@ -138,6 +246,15 @@ namespace PrintBucket.Web.Resources {
         public static string QRCodeNote {
             get {
                 return ResourceManager.GetString("QRCodeNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Scan QR.
+        /// </summary>
+        public static string ScanQRButton {
+            get {
+                return ResourceManager.GetString("ScanQRButton", resourceCulture);
             }
         }
         

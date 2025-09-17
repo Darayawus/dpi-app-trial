@@ -6,14 +6,73 @@
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value></resheader>
 
   <!-- English (default) -->
-  <data name="HomeTitle" xml:space="preserve"><value>Home page</value></data>
-  <data name="HeroHeadline" xml:space="preserve"><value>Your private photo album — fast, secure, and instantly shareable</value></data>
-  <data name="HeroSubhead" xml:space="preserve"><value>Create a personalized space in seconds: upload photos, organize albums, share with a QR code and order professional prints anytime.</value></data>
-  <data name="HeroBenefits" xml:space="preserve"><value>Private · Secure · Easy to share</value></data>
-  <data name="Start" xml:space="preserve"><value>Create my space</value></data>
-  <data name="ImageAlt" xml:space="preserve"><value>PrintBucket hero image</value></data>
-  <data name="QRCodeNote" xml:space="preserve"><value>Share instantly via QR code</value></data>
-  <data name="PrintsNote" xml:space="preserve"><value>Order high-quality prints</value></data>
-  <data name="NavCreate" xml:space="preserve"><value>Create your space</value></data>
-  <data name="NavAccess" xml:space="preserve"><value>Access your space</value></data>
+  <data name="HomeTitle" xml:space="preserve">
+    <value>Home page</value>
+  </data>
+  <data name="HeroHeadline" xml:space="preserve">
+    <value>Your private photo album — fast, secure, and instantly shareable</value>
+  </data>
+  <data name="HeroSubhead" xml:space="preserve">
+    <value>Create a personalized space in seconds: upload photos, organize albums, share with a QR code and order professional prints anytime</value>
+  </data>
+  <data name="HeroBenefits" xml:space="preserve">
+    <value>Private · Secure · Easy to share</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Create my space</value>
+  </data>
+  <data name="ImageAlt" xml:space="preserve">
+    <value>PrintBucket hero image</value>
+  </data>
+  <data name="QRCodeNote" xml:space="preserve">
+    <value>Share instantly via QR code</value>
+  </data>
+  <data name="PrintsNote" xml:space="preserve">
+    <value>Order high-quality prints</value>
+  </data>
+  <data name="NavCreate" xml:space="preserve">
+    <value>Create your space</value>
+  </data>
+  <data name="NavAccess" xml:space="preserve">
+    <value>Access your space</value>
+  </data>
+  <data name="CreateTitle" xml:space="preserve">
+    <value>Create your personalized space</value>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="EmailHelp" xml:space="preserve">
+    <value>We'll send you an access code to this email</value>
+  </data>
+  <data name="NameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AcceptTerms" xml:space="preserve">
+    <value>I accept the terms and conditions</value>
+  </data>
+  <data name="CreateButton" xml:space="preserve">
+    <value>Create space</value>
+  </data>
+  <data name="AccessTitle" xml:space="preserve">
+    <value>Access your space</value>
+  </data>
+  <data name="AccessQRTitle" xml:space="preserve">
+    <value>Scan QR code</value>
+  </data>
+  <data name="AccessQRDescription" xml:space="preserve">
+    <value>Use your device's camera to scan your space's QR code</value>
+  </data>
+  <data name="ScanQRButton" xml:space="preserve">
+    <value>Scan QR</value>
+  </data>
+  <data name="AccessCodeTitle" xml:space="preserve">
+    <value>Use access code</value>
+  </data>
+  <data name="AccessCodeLabel" xml:space="preserve">
+    <value>Access code</value>
+  </data>
+  <data name="AccessButton" xml:space="preserve">
+    <value>Access</value>
+  </data>
 </root>

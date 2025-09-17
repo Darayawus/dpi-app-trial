@@ -181,3 +181,36 @@ body {
         padding: 0 0.5rem;
     }
 }
+
+/* Estilos para las páginas de Create y Access */
+.form-control-lg {
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.card {
+    border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+}
+
+.card-title {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.btn-primary {
+    padding: 0.8rem 1.5rem;
+    font-weight: 500;
+}
+
+.form-check-label {
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .container.py-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+}

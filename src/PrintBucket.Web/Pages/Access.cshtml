@@ -1,0 +1,42 @@
+@page
+@model PrintBucket.Web.Pages.AccessModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = L["NavAccess"];
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <h1 class="display-6 mb-4">@L["AccessTitle"]</h1>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">@L["AccessQRTitle"]</h5>
+                    <p class="card-text">@L["AccessQRDescription"]</p>
+                    <button class="btn btn-primary" id="scanQRBtn">
+                        <i class="bi bi-qr-code-scan me-2"></i>@L["ScanQRButton"]
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">@L["AccessCodeTitle"]</h5>
+                    <form method="post" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label asp-for="Input.AccessCode" class="form-label">@L["AccessCodeLabel"]</label>
+                            <input asp-for="Input.AccessCode" class="form-control form-control-lg" required />
+                            <span asp-validation-for="Input.AccessCode" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">@L["AccessButton"]</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

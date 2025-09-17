@@ -16,4 +16,17 @@
   <data name="PrintsNote" xml:space="preserve"><value>Solicita impresiones de alta calidad</value></data>
   <data name="NavCreate" xml:space="preserve"><value>Crear tu espacio</value></data>
   <data name="NavAccess" xml:space="preserve"><value>Acceder a tu espacio</value></data>
+  <data name="CreateTitle" xml:space="preserve"><value>Crea tu espacio personalizado</value></data>
+  <data name="EmailLabel" xml:space="preserve"><value>Correo electrónico</value></data>
+  <data name="EmailHelp" xml:space="preserve"><value>Te enviaremos un código de acceso a este email</value></data>
+  <data name="NameLabel" xml:space="preserve"><value>Nombre</value></data>
+  <data name="AcceptTerms" xml:space="preserve"><value>Acepto los términos y condiciones</value></data>
+  <data name="CreateButton" xml:space="preserve"><value>Crear espacio</value></data>
+  <data name="AccessTitle" xml:space="preserve"><value>Accede a tu espacio</value></data>
+  <data name="AccessQRTitle" xml:space="preserve"><value>Escanear código QR</value></data>
+  <data name="AccessQRDescription" xml:space="preserve"><value>Usa la cámara de tu dispositivo para escanear el código QR de tu espacio</value></data>
+  <data name="ScanQRButton" xml:space="preserve"><value>Escanear QR</value></data>
+  <data name="AccessCodeTitle" xml:space="preserve"><value>Usar código de acceso</value></data>
+  <data name="AccessCodeLabel" xml:space="preserve"><value>Código de acceso</value></data>
+  <data name="AccessButton" xml:space="preserve"><value>Acceder</value></data>
 </root>

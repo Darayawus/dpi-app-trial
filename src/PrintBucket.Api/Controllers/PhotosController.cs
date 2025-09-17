@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NetVips;
+using Microsoft.Extensions.Configuration;
+using PrintBucket.AWS.Services;
 using PrintBucket.Graphics;
+using PrintBucket.Models;
 using Serilog;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace PrintBucket.Api.Controllers
 {
@@ -11,72 +12,75 @@ namespace PrintBucket.Api.Controllers
     public class ImagesController : ControllerBase
     {
         private readonly ILogger<ImagesController> _logger;
-        private const string UploadDirectory = "uploads";
+        private readonly IS3StorageService _s3Storage;
+        private readonly IBucketService _bucketService;
+        private readonly IImageService _imageService;
+        private readonly IConfiguration _configuration;
 
-        public ImagesController(ILogger<ImagesController> logger)
+        public ImagesController(
+            ILogger<ImagesController> logger,
+            IS3StorageService s3Storage,
+            IBucketService bucketService,
+            IImageService imageService,
+            IConfiguration configuration)
         {
             _logger = logger;
+            _s3Storage = s3Storage;
+            _bucketService = bucketService;
+            _imageService = imageService;
+            _configuration = configuration;
         }
 
-        [HttpPost("upload")]
-        public async Task<IActionResult> Upload(IFormFile file)
+        [HttpPost("upload/{bucketId}")]
+        public async Task<IActionResult> Upload(string bucketId, IFormFile file)
         {
             try
             {
                 if (file == null || file.Length == 0)
-                {
                     return BadRequest("No file uploaded");
-                }
 
-                // Verificar que NetVips está disponible
+                var bucketName = _configuration.GetValue<string>("AWS:S3:BucketName");
+
+                // Verificar que el bucket existe
+                var bucket = await _bucketService.GetBucketByIdAsync(bucketId);
+                if (bucket == null)
+                    return NotFound("Bucket not found");
+
                 if (!ImageProcessor.IsNetVipsAvailable())
-                {
                     return StatusCode(500, "Image processing service not available");
-                }
 
-                // Crear directorio si no existe
-                if (!Directory.Exists(UploadDirectory))
+                using (var stream = file.OpenReadStream())
                 {
-                    Directory.CreateDirectory(UploadDirectory);
-                }
+                    var uploadedKeys = await _s3Storage.UploadImageWithVersionsAsync(bucketName, bucketId, stream, file.FileName);
 
-                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
-                var filePath = Path.Combine(UploadDirectory, fileName);
-
-                // Guardar el archivo temporalmente
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-
-                // Procesar con NetVips
-                using (var originalImage = NetVips.Image.NewFromFile(filePath))
-                {
-                    NetVips.Image processedImage = originalImage;
-                    // Ejemplo: redimensionar a máximo 1200px de ancho manteniendo proporción
-                    if (originalImage.Width > 1200)
+                    // Crear registro en DynamoDB (asume orden: original, large, small)
+                    var record = new ImageRecord
                     {
-                        processedImage = originalImage.Resize((double)1200 / originalImage.Width);
-                    }
+                        BucketId = bucketId,
+                        OriginalKey = uploadedKeys.ElementAtOrDefault(0) ?? string.Empty,
+                        LargeKey = uploadedKeys.ElementAtOrDefault(1) ?? string.Empty,
+                        SmallKey = uploadedKeys.ElementAtOrDefault(2) ?? string.Empty,
+                        FileName = file.FileName,
+                        ContentType = file.ContentType ?? "image/jpeg",
+                        Size = file.Length,
+                        CreatedAt = DateTime.UtcNow
+                    };
 
-                    // Guardar la imagen procesada
-                    var processedPath = Path.Combine(UploadDirectory, $"processed_{fileName}");
-                    processedImage.WriteToFile(processedPath);
+                    await _imageService.AddImageAsync(record);
 
-                    _logger.LogInformation("Image processed successfully: {FileName}", fileName);
+                    _logger.LogInformation("Images uploaded and record created for bucket {BucketId}: {Files}", bucketId, string.Join(", ", uploadedKeys));
 
                     return Ok(new
                     {
+                        id = record.Id,
                         originalName = file.FileName,
-                        savedAs = fileName,
-                        processedFile = $"processed_{fileName}",
-                        size = processedImage.Width + "x" + processedImage.Height
+                        files = uploadedKeys
                     });
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing image");
+                _logger.LogError(ex, "Error processing image for bucket {BucketId}", bucketId);
                 return StatusCode(500, "Error processing image");
             }
         }
