@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace PrintBucket.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class AIController : ControllerBase
     {
         private readonly IBedrockImageAnalyzer _imageAnalyzer;

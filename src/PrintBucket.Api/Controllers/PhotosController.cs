@@ -8,7 +8,7 @@ using Serilog;
 namespace PrintBucket.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class ImagesController : ControllerBase
     {
         private readonly ILogger<ImagesController> _logger;

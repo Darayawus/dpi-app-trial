@@ -18,7 +18,7 @@ Repository layout
 - `src/PrintBucket.Models` — shared models (Bucket, ImageRecord).
 - `src/PrintBucket.Common` — common utilities (logging, etc.).
 - `src/PrintBucket.Tests` — unit / integration tests.
-- `packaging/`, `tools/`, `docs/` — delivery and tooling files.
+- `docs/` — docs files.
 
 Requirements
 ------------

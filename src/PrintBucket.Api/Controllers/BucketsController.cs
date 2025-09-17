@@ -5,7 +5,7 @@ using PrintBucket.Models;
 namespace PrintBucket.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class BucketsController : ControllerBase
     {
         private readonly IBucketService _bucketService;

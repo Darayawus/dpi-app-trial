@@ -39,15 +39,14 @@ namespace PrintBucket.AWS.Services
             // Asegurar que la tabla usa clave compuesta: 'hash_key' y 'range_key'
             // Usamos 'hash_key' = space.Id y 'range_key' = Guid para unicidad
             //var rangeKey = Guid.NewGuid().ToString();
-            var rangeKey = "/";
 
             var request = new PutItemRequest
             {
                 TableName = TableName,
                 Item = new Dictionary<string, AttributeValue>
                 {
-                    { "hash_key", new AttributeValue { S = space.Id } },
-                    { "range_key", new AttributeValue { S = rangeKey } },
+                    { "hash_key", new AttributeValue { S = $"bucket/{space.AccessCode}" } },
+                    { "range_key", new AttributeValue { S = space.Id } },
                     { "email", new AttributeValue { S = space.Email } },
                     { "name", new AttributeValue { S = space.Name } },
                     { "accessCode", new AttributeValue { S = space.AccessCode } },
