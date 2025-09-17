@@ -1,11 +1,13 @@
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.Model;
+using Amazon.Runtime;
+using Amazon.Runtime.CredentialManagement;
 using Moq;
 using PrintBucket.AWS.Services;
 using PrintBucket.Models;
-using Xunit;
-using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.Model;
 using Serilog;
 using System.Text.Json;
+using Xunit;
 
 namespace PrintBucket.Tests.Services
 {
@@ -44,7 +46,7 @@ namespace PrintBucket.Tests.Services
             Assert.Equal(name, result.Name);
             Assert.NotEmpty(result.Id);
             Assert.NotEmpty(result.AccessCode);
-            Assert.Equal("Active", result.Status);
+            Assert.Equal("active", result.Status);
             Assert.True(result.CreatedAt > DateTime.UtcNow.AddMinutes(-1));
 
             _mockDynamoDb.Verify(x => x.PutItemAsync(
@@ -142,7 +144,8 @@ namespace PrintBucket.Tests.Services
                 {
                     new()
                     {
-                        ["id"] = new AttributeValue { S = bucket.Id },
+                        ["hash_key"] = new AttributeValue { S = bucket.Id },
+                        ["range_key"] = new AttributeValue { S = "/" },
                         ["email"] = new AttributeValue { S = bucket.Email },
                         ["name"] = new AttributeValue { S = bucket.Name },
                         ["accessCode"] = new AttributeValue { S = bucket.AccessCode },
@@ -150,14 +153,17 @@ namespace PrintBucket.Tests.Services
                         ["createdAt"] = new AttributeValue { S = bucket.CreatedAt.ToString("O") }
                     }
                 },
-                HttpStatusCode = System.Net.HttpStatusCode.OK
+                HttpStatusCode = System.Net.HttpStatusCode.OK,
+                Count = 1
             };
 
             _mockDynamoDb
                 .Setup(x => x.QueryAsync(
                     It.Is<QueryRequest>(r => 
                         r.TableName == TableName && 
-                        r.IndexName == "accessCode-index"),
+                        r.IndexName == "AccessCodeIndex" &&  // Nombre correcto del índice
+                        r.KeyConditionExpression == "accessCode = :accessCode" &&
+                        r.ExpressionAttributeValues[":accessCode"].S == bucket.AccessCode),
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(queryResponse);
 
@@ -167,7 +173,18 @@ namespace PrintBucket.Tests.Services
             // Assert
             Assert.NotNull(result);
             Assert.Equal(bucket.Id, result.Id);
+            Assert.Equal(bucket.Email, result.Email);
+            Assert.Equal(bucket.Name, result.Name);
             Assert.Equal(bucket.AccessCode, result.AccessCode);
+            Assert.Equal(bucket.Status, result.Status);
+
+            // Verify DynamoDB was called correctly
+            _mockDynamoDb.Verify(x => x.QueryAsync(
+                It.Is<QueryRequest>(r => 
+                    r.TableName == TableName &&
+                    r.IndexName == "AccessCodeIndex"),
+                It.IsAny<CancellationToken>()),
+                Times.Once);
         }
 
         [Fact]

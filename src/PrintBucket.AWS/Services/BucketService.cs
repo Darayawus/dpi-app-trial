@@ -83,19 +83,25 @@ namespace PrintBucket.AWS.Services
 
         public async Task<Bucket?> GetBucketByAccessCodeAsync(string accessCode)
         {
-            var request = new QueryRequest
+            try
             {
-                TableName = TableName,
-                IndexName = "AccessCodeIndex",
-                KeyConditionExpression = "accessCode = :accessCode",
-                ExpressionAttributeValues = new Dictionary<string, AttributeValue>
+                var request = new QueryRequest
+                {
+                    TableName = TableName,
+                    IndexName = "AccessCodeIndex",
+                    KeyConditionExpression = "accessCode = :accessCode",
+                    ExpressionAttributeValues = new Dictionary<string, AttributeValue>
                 {
                     { ":accessCode", new AttributeValue { S = accessCode } }
                 }
-            };
+                };
 
-            var response = await _dynamoDb.QueryAsync(request);
-            return response.Items.Count > 0 ? MapToBucket(response.Items[0]) : null;
+                var response = await _dynamoDb.QueryAsync(request);
+                return response.Items.Count > 0 ? MapToBucket(response.Items[0]) : null;
+            }catch(Exception ex)
+            {
+                return null;
+            }
         }
 
         private Bucket MapToBucket(Dictionary<string, AttributeValue> item)
