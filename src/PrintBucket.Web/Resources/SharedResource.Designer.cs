@@ -232,7 +232,7 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Your private photo album — fast, secure, and instantly shareable.
+        ///   Busca una cadena traducida similar a Say goodbye to losing photos in endless chats..
         /// </summary>
         public static string HeroHeadline {
             get {
@@ -241,7 +241,7 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Create a personalized space in seconds: upload photos, organize albums, share with a QR code and order professional prints anytime.
+        ///   Busca una cadena traducida similar a Your wedding, trip, or birthday—all your memories in one shared album. Organize them effortlessly, personalize them with AI... and transform them into beautiful prints whenever you wish..
         /// </summary>
         public static string HeroSubhead {
             get {

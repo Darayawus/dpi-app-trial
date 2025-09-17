@@ -1,19 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
-  <resheader name="version"><value>2.0</value></resheader>
-  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value></resheader>
-  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value></resheader>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-  <!-- English (default) -->
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <data name="HomeTitle" xml:space="preserve">
     <value>Home page</value>
   </data>
   <data name="HeroHeadline" xml:space="preserve">
-    <value>Your private photo album — fast, secure, and instantly shareable</value>
+    <value>Say goodbye to losing photos in endless chats.</value>
   </data>
   <data name="HeroSubhead" xml:space="preserve">
-    <value>Create a personalized space in seconds: upload photos, organize albums, share with a QR code and order professional prints anytime</value>
+    <value>Your wedding, trip, or birthday—all your memories in one shared album. Organize them effortlessly, personalize them with AI... and transform them into beautiful prints whenever you wish.</value>
   </data>
   <data name="HeroBenefits" xml:space="preserve">
     <value>Private · Secure · Easy to share</value>
@@ -36,9 +147,9 @@
   <data name="NavAccess" xml:space="preserve">
     <value>Access your space</value>
   </data>
-	<data name="Access">
-		<value>Access your space</value>
-	</data>
+  <data name="Access" xml:space="preserve">
+    <value>Access your space</value>
+  </data>
   <data name="CreateTitle" xml:space="preserve">
     <value>Create your personalized space</value>
   </data>
@@ -78,45 +189,90 @@
   <data name="AccessButton" xml:space="preserve">
     <value>Access</value>
   </data>
-  <data name="QRScan_Instructions"><value>Point the camera at a QR code</value></data>
-  <data name="QRScan_Requesting"><value>Requesting camera access...</value></data>
-  <data name="QRScan_Searching"><value>Searching for QR code...</value></data>
-  <data name="QRScan_Error"><value>Could not access camera</value></data>
-  <data name="ScanQRTitle"><value>Scan QR Code</value></data>
-  <data name="Cancel"><value>Cancel</value></data>
-
-  <!-- Privacy policy -->
-  <data name="Privacy_Title"><value>Privacy Policy</value></data>
-  <data name="Privacy_Intro"><value>&lt;p&gt;This privacy policy explains how PrintBucket collects, uses and discloses information when you use the Web UI and API.&lt;/p&gt;</value></data>
-
-  <data name="Privacy_DataCollectedTitle"><value>Data we collect</value></data>
-  <data name="Privacy_DataCollected_Usage"><value>Usage data such as IP address, timestamps, request logs and performance metrics necessary to operate the service.</value></data>
-  <data name="Privacy_DataCollected_FileUploads"><value>Files you upload (images), associated metadata (file names, bucket IDs) and optional descriptions you provide.</value></data>
-  <data name="Privacy_DataCollected_Diagnostics"><value>Optional diagnostic and error reports (stack traces, logs) if you enable them to help us improve the product.</value></data>
-
-  <data name="Privacy_HowWeUseTitle"><value>How we use your data</value></data>
-  <data name="Privacy_HowWeUse"><value>We use data to provide, operate and improve the service, to process uploads, to respond to support requests and to detect abuse.</value></data>
-
-  <data name="Privacy_ThirdPartiesTitle"><value>Third‑party services</value></data>
-  <data name="Privacy_ThirdParties"><value>We use AWS services (S3, DynamoDB) and may use external analytics or monitoring providers. Their privacy policies apply to data they process.</value></data>
-
-  <data name="Privacy_RetentionTitle"><value>Data retention</value></data>
-  <data name="Privacy_Retention"><value>Uploaded files and metadata are retained while your bucket exists or as required by law. You can request deletion; removal may take time to propagate.</value></data>
-
-  <data name="Privacy_SecurityTitle"><value>Security</value></data>
-  <data name="Privacy_Security"><value>We apply standard security measures (TLS in transit, AWS access controls). The protection of stored objects depends on bucket policies and correct configuration.</value></data>
-
-  <data name="Privacy_YourRightsTitle"><value>Your rights</value></data>
-  <data name="Privacy_YourRights"><value>You may request access, correction or deletion of personal data. Contact support and provide identification to exercise these rights.</value></data>
-
-  <data name="Privacy_ChildrenTitle"><value>Children</value></data>
-  <data name="Privacy_Children"><value>The service is not intended for children under 13. We do not knowingly collect personal data from children.</value></data>
-
-  <data name="Privacy_ChangesTitle"><value>Changes to this policy</value></data>
-  <data name="Privacy_Changes"><value>We may update this policy. We will post changes here with a revised effective date.</value></data>
-
-  <data name="Privacy_ContactTitle"><value>Contact</value></data>
-  <data name="Privacy_Contact"><value>For privacy questions contact: dario@parresibarra.com</value></data>
+  <data name="QRScan_Instructions" xml:space="preserve">
+    <value>Point the camera at a QR code</value>
+  </data>
+  <data name="QRScan_Requesting" xml:space="preserve">
+    <value>Requesting camera access...</value>
+  </data>
+  <data name="QRScan_Searching" xml:space="preserve">
+    <value>Searching for QR code...</value>
+  </data>
+  <data name="QRScan_Error" xml:space="preserve">
+    <value>Could not access camera</value>
+  </data>
+  <data name="ScanQRTitle" xml:space="preserve">
+    <value>Scan QR Code</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Privacy_Title" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Privacy_Intro" xml:space="preserve">
+    <value>&lt;p&gt;This privacy policy explains how PrintBucket collects, uses and discloses information when you use the Web UI and API.&lt;/p&gt;</value>
+  </data>
+  <data name="Privacy_DataCollectedTitle" xml:space="preserve">
+    <value>Data we collect</value>
+  </data>
+  <data name="Privacy_DataCollected_Usage" xml:space="preserve">
+    <value>Usage data such as IP address, timestamps, request logs and performance metrics necessary to operate the service.</value>
+  </data>
+  <data name="Privacy_DataCollected_FileUploads" xml:space="preserve">
+    <value>Files you upload (images), associated metadata (file names, bucket IDs) and optional descriptions you provide.</value>
+  </data>
+  <data name="Privacy_DataCollected_Diagnostics" xml:space="preserve">
+    <value>Optional diagnostic and error reports (stack traces, logs) if you enable them to help us improve the product.</value>
+  </data>
+  <data name="Privacy_HowWeUseTitle" xml:space="preserve">
+    <value>How we use your data</value>
+  </data>
+  <data name="Privacy_HowWeUse" xml:space="preserve">
+    <value>We use data to provide, operate and improve the service, to process uploads, to respond to support requests and to detect abuse.</value>
+  </data>
+  <data name="Privacy_ThirdPartiesTitle" xml:space="preserve">
+    <value>Third‑party services</value>
+  </data>
+  <data name="Privacy_ThirdParties" xml:space="preserve">
+    <value>We use AWS services (S3, DynamoDB) and may use external analytics or monitoring providers. Their privacy policies apply to data they process.</value>
+  </data>
+  <data name="Privacy_RetentionTitle" xml:space="preserve">
+    <value>Data retention</value>
+  </data>
+  <data name="Privacy_Retention" xml:space="preserve">
+    <value>Uploaded files and metadata are retained while your bucket exists or as required by law. You can request deletion; removal may take time to propagate.</value>
+  </data>
+  <data name="Privacy_SecurityTitle" xml:space="preserve">
+    <value>Security</value>
+  </data>
+  <data name="Privacy_Security" xml:space="preserve">
+    <value>We apply standard security measures (TLS in transit, AWS access controls). The protection of stored objects depends on bucket policies and correct configuration.</value>
+  </data>
+  <data name="Privacy_YourRightsTitle" xml:space="preserve">
+    <value>Your rights</value>
+  </data>
+  <data name="Privacy_YourRights" xml:space="preserve">
+    <value>You may request access, correction or deletion of personal data. Contact support and provide identification to exercise these rights.</value>
+  </data>
+  <data name="Privacy_ChildrenTitle" xml:space="preserve">
+    <value>Children</value>
+  </data>
+  <data name="Privacy_Children" xml:space="preserve">
+    <value>The service is not intended for children under 13. We do not knowingly collect personal data from children.</value>
+  </data>
+  <data name="Privacy_ChangesTitle" xml:space="preserve">
+    <value>Changes to this policy</value>
+  </data>
+  <data name="Privacy_Changes" xml:space="preserve">
+    <value>We may update this policy. We will post changes here with a revised effective date.</value>
+  </data>
+  <data name="Privacy_ContactTitle" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Privacy_Contact" xml:space="preserve">
+    <value>For privacy questions contact: dario@parresibarra.com</value>
+  </data>
   <data name="AccessCode_Required" xml:space="preserve">
     <value>Access code is required</value>
   </data>
