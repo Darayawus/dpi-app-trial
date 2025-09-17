@@ -294,4 +294,7 @@
   <data name="BucketViewTitle" xml:space="preserve">
     <value>Space details</value>
   </data>
+  <data name="AnalyzeImage" xml:space="preserve">
+    <value>Analyze image with AI</value>
+  </data>
 </root>

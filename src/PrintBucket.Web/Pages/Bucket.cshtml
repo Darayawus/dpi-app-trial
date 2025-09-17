@@ -32,6 +32,12 @@
                                                class="btn btn-sm btn-outline-primary" target="_blank">
                                                 <i class="bi bi-download"></i> @L["Download"]
                                             </a>
+                                            <button type="button" 
+                                                    class="btn btn-sm btn-outline-secondary analyze-btn" 
+                                                    data-image-url="@($"{s3Base}/{Uri.EscapeDataString(image.OriginalKey ?? string.Empty)}")"
+                                                    title="@L["AnalyzeImage"]">
+                                                <i class="bi bi-robot"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -111,6 +117,46 @@
                     fileInput.form.submit();
                 });
             }
+        });
+    </script>
+
+    <!-- Existing scripts -->
+    <script>
+        // AI Analysis handling
+        document.querySelectorAll('.analyze-btn').forEach(button => {
+            button.addEventListener('click', async function() {
+                const imageUrl = this.dataset.imageUrl;
+                const button = this;
+                
+                // Disable button and show loading state
+                button.disabled = true;
+                const originalIcon = button.innerHTML;
+                button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+
+                try {
+                    const response = await fetch('/api/ai/analyze', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ imageUrl: imageUrl })
+                    });
+
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    
+                    const result = await response.json();
+                    
+                    // Show result in a modal or alert
+                    alert(result.description);
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error analyzing image');
+                } finally {
+                    // Restore button state
+                    button.disabled = false;
+                    button.innerHTML = originalIcon;
+                }
+            });
         });
     </script>
 }

@@ -178,6 +178,15 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Analyze image with AI.
+        /// </summary>
+        public static string AnalyzeImage {
+            get {
+                return ResourceManager.GetString("AnalyzeImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Space details.
         /// </summary>
         public static string BucketViewTitle {
