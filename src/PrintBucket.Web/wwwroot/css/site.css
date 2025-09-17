@@ -119,7 +119,7 @@ body {
 /* Mejoras de maquetación para la página principal */
 .hero-image-wrapper {
     margin: -2rem auto 3rem;
-    max-width: 800px;
+    max-width: 400px;
 }
 
 .hero-content {
