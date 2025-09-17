@@ -1,4 +1,4 @@
-# PrintBucket
+﻿# PrintBucket
 
 Summary
 -------
@@ -12,13 +12,13 @@ Demo
 
 Repository layout
 -----------------
-- `src/PrintBucket.Web` � Razor Pages frontend.
-- `src/PrintBucket.Api` � REST API (upload, buckets, endpoints).
-- `src/PrintBucket.AWS` � AWS services (S3, DynamoDB, utilities).
-- `src/PrintBucket.Models` � shared models (Bucket, ImageRecord).
-- `src/PrintBucket.Common` � common utilities (logging, etc.).
-- `src/PrintBucket.Tests` � unit / integration tests.
-- `docs/` � docs files.
+- `src/PrintBucket.Web` — Razor Pages frontend.
+- `src/PrintBucket.Api` — REST API (upload, buckets, endpoints).
+- `src/PrintBucket.AWS` — AWS services (S3, DynamoDB, utilities).
+- `src/PrintBucket.Models` — shared models (Bucket, ImageRecord).
+- `src/PrintBucket.Common` — common utilities (logging, etc.).
+- `src/PrintBucket.Tests` — unit / integration tests.
+- `docs/` — docs files.
 
 Requirements
 ------------
@@ -80,11 +80,13 @@ Available metrics include:
 
 These endpoints can be scraped by Prometheus and visualized using Grafana dashboards.
 
-## Continuous Integration (CI)
+## Continuous Integration (CI) / Continuous Deployment (CD)
 
-We use an automated CI pipeline to build, test and produce artifacts for PrintBucket. The canonical CI server for this repository is:
+I use an automated CI/CD pipeline to build, test and produce artifacts for PrintBucket. The canonical CI/CD server for this repository is:
 
 https://buildserver.parresibarra.com
+
+If needed a readonly access can be provided.
 
 ### TeamCity Environment
 
@@ -116,6 +118,36 @@ Operational notes
 -----------------
 - Install native `libvips` on hosts used for image processing.
 - Serilog is configured in `PrintBucket.Common.Logging`; adjust sinks as needed.
+
+## Why PrintBucket?
+
+### Value Proposition
+- **Social experience:** event attendees can upload their photos to a **shared album**.
+- **Simplicity:** sharing via **QR code** avoids the usual chaos of exchanging photos over WhatsApp or social media.
+- **AI personalization:** smart analysis/selection provides an edge over conventional galleries.
+- **Natural monetization:** enables **photo and album printing**.
+
+### Features that can strengthen the product (roadmap)
+- **Collaborative editing:** multiple people contribute photos to the same album.
+- **AI auto-curation:** drop blurred shots, closed eyes, and duplicates; prioritize the “best” photos.
+- **Album templates:** ready-made designs for printing or **PDF** export.
+- **Privacy options:** album **public/private**, password-protected, or **time-limited access**.
+
+> **Proposed QR flow:** organizer creates album → generates **QR** → guests scan and upload photos → creator reviews/curates → optionally **prints** or exports.
+
+### Highlighted use cases
+- **Weddings:** QR on the tables; guests upload their photos; the couple gets everything neatly organized.
+- **Birthdays & communions:** parents collect everyone’s photos without chasing chat messages.
+- **Group trips:** each traveler contributes, creating a shared trip album.
+- **Corporate events:** shared galleries for trade shows, launches, team buildings.
+
+### Short roadmap
+- [ ] Generate **QR** per album (view + endpoint).
+- [ ] **Guest** access with time-limited code (TTL).
+- [ ] Basic curation (blur detection / top-N selection).
+- [ ] **PDF** export using a template.
+- [ ] Admin/guest roles surfaced in the UI.
+
 
 
 
