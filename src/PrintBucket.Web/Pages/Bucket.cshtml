@@ -14,11 +14,16 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h1 class="display-6 mb-0">@Model.Bucket.Name</h1>
-                            <span class="badge bg-primary">@Model.Bucket.Status</span>
+                            <span class="badge bg-primary btn-app">@Model.Bucket.Status</span>
                         </div>
                         <p class="text-muted">
                             <i class="bi bi-calendar3"></i> @L["CreatedAt"]: @Model.Bucket.CreatedAt.ToLocalTime().ToString("g")
                         </p>
+                        <!-- QR code for bucket.id -->
+                        <div class="mb-3">
+                            <div id="bucket-qr"></div>
+                            <div class="small text-muted mt-2">@Model.Bucket.Id</div>
+                        </div>
                     </div>
                 </div>
 
@@ -49,7 +54,7 @@
                 else
                 {
                     <div class="text-center py-5">
-                        <p class="text-muted">@L["NoImages"]</p>
+                        <p class="text-muted"></p>
                     </div>
                 }
             }
@@ -64,3 +69,22 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var bucketId = "@Model.Bucket?.Id";
+            if (bucketId) {
+                new QRCode(document.getElementById("bucket-qr"), {
+                    text: bucketId,
+                    width: 128,
+                    height: 128,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            }
+        });
+    </script>
+}
