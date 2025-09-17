@@ -45,7 +45,7 @@ namespace PrintBucket.AWS.Services
                 TableName = TableName,
                 Item = new Dictionary<string, AttributeValue>
                 {
-                    { "hash_key", new AttributeValue { S = $"bucket/{space.AccessCode}" } },
+                    { "hash_key", new AttributeValue { S = $"bucket-{space.AccessCode}" } },
                     { "range_key", new AttributeValue { S = space.Id } },
                     { "email", new AttributeValue { S = space.Email } },
                     { "name", new AttributeValue { S = space.Name } },
