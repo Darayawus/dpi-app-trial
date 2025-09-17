@@ -67,7 +67,7 @@ appsettings.Local.json
 secrets.json
 
 # --- ASP.NET static libs (if using LibMan)
-**/wwwroot/lib/
+#**/wwwroot/lib/
 
 # --- ReSharper / analyzers
 _ReSharper*/
