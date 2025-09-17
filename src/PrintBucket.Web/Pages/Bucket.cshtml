@@ -58,15 +58,15 @@
                                 <form method="post" enctype="multipart/form-data" asp-page-handler="Upload" asp-route-id="@Model.Bucket.Id">
                                     <input type="file" id="fileInput" name="files" multiple class="d-none" />
                                     
-                                    <p class="d-inline-block text-center">
+                                    <div class="d-inline-flex flex-column align-items-center">
                                         <label for="fileInput" class="rounded-circle shadow-lg d-inline-flex align-items-center justify-content-center"
                                                style="width:56px;height:56px;background-color:#0d6efd;border:none;cursor:pointer;">
                                             <i class="bi bi-plus-lg text-white" style="font-size:28px;line-height:1;"></i>
                                             <span class="visually-hidden">Upload</span>
                                         </label>
-                                        <!-- caption under button, localized -->
-                                        <p class="">@L["AddPhotos"]</p>
-                                    </p>
+                                        <!-- caption under button, localized and centered -->
+                                        <small class="text-muted mt-2">@L["AddPhotos"]</small>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -93,8 +93,8 @@
             if (bucketId) {
                 new QRCode(document.getElementById("qr"), {
                     text: bucketId.replace("bucket-",""),
-                    width: 130,  // Reduced size to better fit
-                    height: 130,
+                    width: 115,  // Reduced size to better fit
+                    height: 115,
                     colorDark: "#000000",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
