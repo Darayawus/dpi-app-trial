@@ -27,7 +27,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintBucket.AWS", "PrintBuc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{35FC2883-E8F1-4B9D-A0FE-F1511C184974}"
 	ProjectSection(SolutionItems) = preProject
+		..\changelog.md = ..\changelog.md
 		..\README.md = ..\README.md
+		..\TODO.md = ..\TODO.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintBucket.IA", "PrintBucket.IA\PrintBucket.IA.csproj", "{02F4BA37-1249-435E-A833-37BE6F0C4AB5}"

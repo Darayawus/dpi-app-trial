@@ -2,6 +2,7 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.Model;
 using PrintBucket.Models;
+using Serilog;
 using System.Text.Json;
 
 namespace PrintBucket.AWS.Services
@@ -17,10 +18,13 @@ namespace PrintBucket.AWS.Services
     {
         private readonly IAmazonDynamoDB _dynamoDb;
         private const string TableName = "dpi_bucket";
+        private readonly ILogger _logger;
 
         public BucketService(IAmazonDynamoDB dynamoDb)
         {
             _dynamoDb = dynamoDb;
+            _logger = Log.ForContext<BedrockImageAnalyzer>();
+
         }
 
         public async Task<Bucket> CreateBucketAsync(string email, string name)
@@ -83,6 +87,8 @@ namespace PrintBucket.AWS.Services
 
         public async Task<Bucket?> GetBucketByAccessCodeAsync(string accessCode)
         {
+            _logger.Information("GetBucketByAccessCodeAsync called with accessCode: {AccessCode}", accessCode);
+
             try
             {
                 var request = new QueryRequest
@@ -91,15 +97,31 @@ namespace PrintBucket.AWS.Services
                     IndexName = "AccessCodeIndex",
                     KeyConditionExpression = "accessCode = :accessCode",
                     ExpressionAttributeValues = new Dictionary<string, AttributeValue>
-                {
-                    { ":accessCode", new AttributeValue { S = accessCode } }
-                }
+                    {
+                        { ":accessCode", new AttributeValue { S = accessCode } }
+                    }
                 };
 
+                _logger.Debug("DynamoDB QueryRequest: {@Request}", request);
+
                 var response = await _dynamoDb.QueryAsync(request);
-                return response.Items.Count > 0 ? MapToBucket(response.Items[0]) : null;
-            }catch(Exception ex)
+
+                _logger.Debug("DynamoDB QueryResponse: {@Response}", response);
+
+                if (response.Items.Count > 0)
+                {
+                    _logger.Information("Bucket found for accessCode: {AccessCode}", accessCode);
+                    return MapToBucket(response.Items[0]);
+                }
+                else
+                {
+                    _logger.Warning("No bucket found for accessCode: {AccessCode}", accessCode);
+                    return null;
+                }
+            }
+            catch (Exception ex)
             {
+                _logger.Error(ex, "Error in GetBucketByAccessCodeAsync for accessCode: {AccessCode}", accessCode);
                 return null;
             }
         }
