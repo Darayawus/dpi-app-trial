@@ -169,6 +169,15 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Add photos.
+        /// </summary>
+        public static string AddPhotos {
+            get {
+                return ResourceManager.GetString("AddPhotos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cancel.
         /// </summary>
         public static string Cancel {
@@ -468,9 +477,9 @@ namespace PrintBucket.Web.Resources {
         /// <summary>
         ///   Busca una cadena traducida similar a Third‑party services.
         /// </summary>
-        public static string Privacy_ThirdPartiesTitle {
+        public static string Privacy_ThirdPartiesTitle_ {
             get {
-                return ResourceManager.GetString("Privacy_ThirdPartiesTitle", resourceCulture);
+                return ResourceManager.GetString("Privacy_ThirdPartiesTitle ", resourceCulture);
             }
         }
         

@@ -58,11 +58,15 @@
                                 <form method="post" enctype="multipart/form-data" asp-page-handler="Upload" asp-route-id="@Model.Bucket.Id">
                                     <input type="file" id="fileInput" name="files" multiple class="d-none" />
                                     
-                                    <label for="fileInput" class="btn btn-lg rounded-circle position-relative shadow-lg" 
-                                           style="width:56px;height:56px;background-color:#0d6efd;border:none;">
-                                        <span class="position-absolute top-50 start-50 translate-middle text-white fw-bold"
-                                              style="font-size: 32px;line-height:1;">+</span>
-                                    </label>
+                                    <p class="d-inline-block text-center">
+                                        <label for="fileInput" class="rounded-circle shadow-lg d-inline-flex align-items-center justify-content-center"
+                                               style="width:56px;height:56px;background-color:#0d6efd;border:none;cursor:pointer;">
+                                            <i class="bi bi-plus-lg text-white" style="font-size:28px;line-height:1;"></i>
+                                            <span class="visually-hidden">Upload</span>
+                                        </label>
+
+                                        <!-- caption under button, localized -->
+                                        <p class="mt-2">@L["AddPhotos"]</p>
                                 </form>
                             </div>
                         </div>

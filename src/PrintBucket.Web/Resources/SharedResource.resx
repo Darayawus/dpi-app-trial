@@ -231,9 +231,6 @@
   <data name="Privacy_HowWeUse" xml:space="preserve">
     <value>We use data to provide, operate and improve the service, to process uploads, to respond to support requests and to detect abuse.</value>
   </data>
-  <data name="Privacy_ThirdPartiesTitle" xml:space="preserve">
-    <value>Third‑party services</value>
-  </data>
   <data name="Privacy_ThirdParties" xml:space="preserve">
     <value>We use AWS services (S3, DynamoDB) and may use external analytics or monitoring providers. Their privacy policies apply to data they process.</value>
   </data>
@@ -287,5 +284,11 @@
   </data>
   <data name="CreateBucket_Error" xml:space="preserve">
     <value>An error occurred while creating your bucket. Please try again later.</value>
+  </data>
+  <data name="Privacy_ThirdPartiesTitle " xml:space="preserve">
+    <value>Third‑party services</value>
+  </data>
+  <data name="AddPhotos" xml:space="preserve">
+    <value>Add photos</value>
   </data>
 </root>

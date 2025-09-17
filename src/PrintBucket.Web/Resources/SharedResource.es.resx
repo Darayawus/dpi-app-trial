@@ -288,4 +288,7 @@
   <data name="CreateBucket_Error" xml:space="preserve">
     <value>Ocurrió un error al crear tu espacio. Por favor, inténtalo más tarde.</value>
   </data>
+  <data name="AddPhotos" xml:space="preserve">
+    <value>Añadir fotos</value>
+  </data>
 </root>
