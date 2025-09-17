@@ -27,16 +27,17 @@
                                         <p class="card-text small text-muted">
                                             @image.CreatedAt.ToLocalTime().ToString("g")
                                         </p>
-                                        <div class="btn-group">
+                                        <div class="d-flex justify-content-between align-items-center">
                                             <a href="@(string.IsNullOrEmpty(s3Base) ? Uri.EscapeUriString(image.OriginalKey ?? string.Empty) : $"{s3Base}/{Uri.EscapeDataString(image.OriginalKey ?? string.Empty)}")"
-                                               class="btn btn-sm btn-outline-primary" target="_blank">
+                                               class="btn btn-app" target="_blank">
                                                 <i class="bi bi-download"></i> @L["Download"]
                                             </a>
                                             <button type="button" 
-                                                    class="btn btn-sm btn-outline-secondary analyze-btn" 
+                                                    class="btn btn-outline-secondary analyze-btn rounded-circle" 
                                                     data-image-url="@($"{s3Base}/{Uri.EscapeDataString(image.OriginalKey ?? string.Empty)}")"
-                                                    title="@L["AnalyzeImage"]">
-                                                <i class="bi bi-robot"></i>
+                                                    title="@L["AnalyzeImage"]"
+                                                    style="width: 42px; height: 42px;">
+                                                <i class="bi bi-robot fs-5"></i>
                                             </button>
                                         </div>
                                     </div>

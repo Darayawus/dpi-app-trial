@@ -97,7 +97,7 @@ namespace PrintBucket.Api.Controllers
                     return NotFound("Bucket not found");
 
                 var images = await _imageService.GetImagesByBucketAsync(bucketId, limit: 100);
-                images = images.OrderBy(x => x.CreatedAt).ToList();
+                images = images.OrderByDescending(x => x.CreatedAt).ToList();
                 return Ok(images);
             }
             catch (Exception ex)
