@@ -52,5 +52,28 @@ namespace PrintBucket.Web.Pages
                 return StatusCode(500);
             }
         }
+
+        [BindProperty]
+        public List<IFormFile> Files { get; set; } = new();
+
+        public async Task<IActionResult> OnPostUploadAsync(string id)
+        {
+            if (Files == null || Files.Count == 0)
+            {
+                ModelState.AddModelError("", "No files selected.");
+                return Page();
+            }
+
+            // Aquí deberías guardar los archivos en S3 o donde corresponda
+            foreach (var file in Files)
+            {
+                using var stream = file.OpenReadStream();
+                // TODO: Llama a tu servicio de almacenamiento, por ejemplo:
+                // await _imageService.SaveImageAsync(id, file.FileName, stream);
+            }
+
+            // Redirige a la misma página para refrescar la lista de imágenes
+            return RedirectToPage(new { id });
+        }
     }
 }

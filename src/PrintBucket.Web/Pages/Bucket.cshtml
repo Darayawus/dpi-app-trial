@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h1 class="display-6 mb-0">@Model.Bucket.Name</h1>
-                            <span class="badge bg-primary btn-app">@Model.Bucket.Status</span>
+                            <span class="badge bg-primary btn-app d-none">@Model.Bucket.Status</span>
                         </div>
                         <p class="text-muted">
                             <i class="bi bi-calendar3"></i> @L["CreatedAt"]: @Model.Bucket.CreatedAt.ToLocalTime().ToString("g")
@@ -57,6 +57,16 @@
                         <p class="text-muted"></p>
                     </div>
                 }
+
+                <!-- File uploader at the bottom -->
+                <div class="fixed-bottom d-flex justify-content-center pb-4">
+                    <form method="post" enctype="multipart/form-data" asp-page-handler="Upload" asp-route-id="@Model.Bucket.Id">
+                        <input type="file" id="fileInput" name="files" multiple class="d-none" />
+                        <label for="fileInput" class="btn btn-lg btn-success rounded-circle" style="width:64px;height:64px;display:flex;align-items:center;justify-content:center;">
+                            <i class="bi bi-plus-lg fs-2"></i>
+                        </label>
+                    </form>
+                </div>
             }
             else
             {
@@ -77,12 +87,20 @@
             var bucketId = "@Model.Bucket?.Id";
             if (bucketId) {
                 new QRCode(document.getElementById("bucket-qr"), {
-                    text: bucketId,
+                    text: bucketId.replace("bucket-",""),
                     width: 128,
                     height: 128,
                     colorDark: "#000000",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
+                });
+            }
+
+            // Auto-submit form when files are selected
+            var fileInput = document.getElementById('fileInput');
+            if (fileInput) {
+                fileInput.addEventListener('change', function () {
+                    fileInput.form.submit();
                 });
             }
         });
