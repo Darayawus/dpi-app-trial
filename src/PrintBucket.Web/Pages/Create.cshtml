@@ -27,7 +27,7 @@
                     <label asp-for="Input.Email" class="form-label">@L["EmailLabel"]</label>
                     <input asp-for="Input.Email" class="form-control form-control-lg" type="email" required />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    <div class="form-text">@L["EmailHelp"]</div>
+                    <div class="form-text d-none">@L["EmailHelp"]</div>
                 </div>
 
                 <div class="mb-4">
