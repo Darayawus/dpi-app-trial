@@ -10,26 +10,10 @@
         <div class="col-12">
             @if (Model.Bucket != null)
             {
-                <div class="card shadow-sm mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h1 class="display-6 mb-0">@Model.Bucket.Name</h1>
-                            <span class="badge bg-primary btn-app d-none">@Model.Bucket.Status</span>
-                        </div>
-                        <p class="text-muted">
-                            <i class="bi bi-calendar3"></i> @L["CreatedAt"]: @Model.Bucket.CreatedAt.ToLocalTime().ToString("g")
-                        </p>
-                        <!-- QR code for bucket.id -->
-                        <div class="mb-3">
-                            <div id="bucket-qr"></div>
-                            <div class="small text-muted mt-2">@Model.Bucket.Id</div>
-                        </div>
-                    </div>
-                </div>
-
+                <!-- Main content (images) -->
                 @if (Model.Images?.Any() == true)
                 {
-                    <div class="row g-4">
+                    <div class="row g-4 mb-5 pb-5"> <!-- Added bottom padding to account for fixed footer -->
                         @foreach (var image in Model.Images)
                         {
                             <div class="col-12 col-md-6 col-lg-4">
@@ -51,21 +35,38 @@
                         }
                     </div>
                 }
-                else
-                {
-                    <div class="text-center py-5">
-                        <p class="text-muted"></p>
-                    </div>
-                }
 
-                <!-- File uploader at the bottom -->
-                <div class="fixed-bottom d-flex justify-content-center pb-4">
-                    <form method="post" enctype="multipart/form-data" asp-page-handler="Upload" asp-route-id="@Model.Bucket.Id">
-                        <input type="file" id="fileInput" name="files" multiple class="d-none" />
-                        <label for="fileInput" class="btn btn-lg btn-success rounded-circle" style="width:64px;height:64px;display:flex;align-items:center;justify-content:center;">
-                            <i class="bi bi-plus-lg fs-2"></i>
-                        </label>
-                    </form>
+                <!-- Fixed bottom bar containing all elements -->
+                <div class="fixed-bottom bg-white border-top shadow-lg">
+                    <div class="container">
+                        <div class="row py-3 align-items-center">
+                            <!-- QR on the left -->
+                            <div class="col-3 text-start">
+                                <div id="qr" class="d-inline-block"></div>
+                            </div>
+                            
+                            <!-- Info in the center -->
+                            <div class="col-6 text-center">
+                                <h5 class="mb-1">@Model.Bucket.Name</h5>
+                                <small class="text-muted">
+                                    <i class="bi bi-calendar3"></i> @Model.Bucket.CreatedAt.ToLocalTime().ToString("g")
+                                </small>
+                            </div>
+                            
+                            <!-- Upload button on the right -->
+                            <div class="col-3 text-end">
+                                <form method="post" enctype="multipart/form-data" asp-page-handler="Upload" asp-route-id="@Model.Bucket.Id">
+                                    <input type="file" id="fileInput" name="files" multiple class="d-none" />
+                                    
+                                    <label for="fileInput" class="btn btn-lg rounded-circle position-relative shadow-lg" 
+                                           style="width:56px;height:56px;background-color:#0d6efd;border:none;">
+                                        <span class="position-absolute top-50 start-50 translate-middle text-white fw-bold"
+                                              style="font-size: 32px;line-height:1;">+</span>
+                                    </label>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             }
             else
@@ -86,17 +87,16 @@
         document.addEventListener("DOMContentLoaded", function () {
             var bucketId = "@Model.Bucket?.Id";
             if (bucketId) {
-                new QRCode(document.getElementById("bucket-qr"), {
+                new QRCode(document.getElementById("qr"), {
                     text: bucketId.replace("bucket-",""),
-                    width: 128,
-                    height: 128,
+                    width: 130,  // Reduced size to better fit
+                    height: 130,
                     colorDark: "#000000",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
                 });
             }
 
-            // Auto-submit form when files are selected
             var fileInput = document.getElementById('fileInput');
             if (fileInput) {
                 fileInput.addEventListener('change', function () {
