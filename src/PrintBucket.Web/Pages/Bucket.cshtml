@@ -54,6 +54,19 @@
                             <!-- QR on the left -->
                             <div class="col-3 text-start">
                                 <div id="qr" class="d-inline-block"></div>
+
+                                <!-- Download QR button -->
+                                <div class="mt-2">
+                                    <a id="download-qr"
+                                       class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center"
+                                       href="#"
+                                       download="printbucket-qr.png"
+                                       aria-disabled="true"
+                                       title="Download QR">
+                                        <i class="bi bi-download me-1"></i>
+                                        Download QR
+                                    </a>
+                                </div>
                             </div>
                             
                             <!-- Info in the center -->
@@ -118,6 +131,9 @@
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
                 });
+
+                // Allow a short delay for qrcode.js to render
+                setTimeout(setQrDownload, 120);
             }
 
             var fileInput = document.getElementById('fileInput');
@@ -126,46 +142,79 @@
                     fileInput.form.submit();
                 });
             }
-        });
-    </script>
 
-    <!-- Existing scripts -->
-    <script>
-        // AI Analysis handling
-        document.querySelectorAll('.analyze-btn').forEach(button => {
-            button.addEventListener('click', async function() {
-                const imageUrl = this.dataset.imageUrl;
-                const button = this;
-                
-                // Disable button and show loading state
-                button.disabled = true;
-                const originalIcon = button.innerHTML;
-                button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
-
-                try {
-                    const response = await fetch('/api/ai/analyze', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ imageUrl: imageUrl })
-                    });
-
-                    if (!response.ok) throw new Error('Network response was not ok');
+            // Setup AI analyze buttons (existing)
+            document.querySelectorAll('.analyze-btn').forEach(button => {
+                button.addEventListener('click', async function() {
+                    const imageUrl = this.dataset.imageUrl;
+                    const button = this;
                     
-                    const result = await response.json();
-                    
-                    // Show result in a modal or alert
-                    alert(result.description);
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('Error analyzing image');
-                } finally {
-                    // Restore button state
-                    button.disabled = false;
-                    button.innerHTML = originalIcon;
-                }
+                    // Disable button and show loading state
+                    button.disabled = true;
+                    const originalIcon = button.innerHTML;
+                    button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+
+                    try {
+                        const response = await fetch('/api/ai/analyze', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ imageUrl: imageUrl })
+                        });
+
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        
+                        const result = await response.json();
+                        
+                        // Show result in a modal or alert
+                        alert(result.description);
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Error analyzing image');
+                    } finally {
+                        // Restore button state
+                        button.disabled = false;
+                        button.innerHTML = originalIcon;
+                    }
+                });
             });
+
+            // Function to find the generated QR and set download href
+            function setQrDownload() {
+                const qrContainer = document.getElementById('qr');
+                const downloadLink = document.getElementById('download-qr');
+                if (!qrContainer || !downloadLink) return;
+
+                // Try to find an <img> first (qrcode.js might render an image), else a canvas
+                const img = qrContainer.querySelector('img');
+                if (img && img.src) {
+                    downloadLink.href = img.src;
+                    downloadLink.removeAttribute('aria-disabled');
+                    downloadLink.classList.remove('disabled');
+                    return;
+                }
+
+                const canvas = qrContainer.querySelector('canvas');
+                if (canvas) {
+                    try {
+                        const dataUrl = canvas.toDataURL('image/png');
+                        downloadLink.href = dataUrl;
+                        downloadLink.removeAttribute('aria-disabled');
+                        downloadLink.classList.remove('disabled');
+                    } catch (e) {
+                        // canvas might be tainted if loaded cross-origin; disable download
+                        console.warn('QR download not available:', e);
+                        downloadLink.setAttribute('aria-disabled', 'true');
+                        downloadLink.classList.add('disabled');
+                    }
+                    return;
+                }
+
+                // If no render found, disable link
+                downloadLink.setAttribute('aria-disabled', 'true');
+                downloadLink.classList.add('disabled');
+            }
         });
     </script>
 }
