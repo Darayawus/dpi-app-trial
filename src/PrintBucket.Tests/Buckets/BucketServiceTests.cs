@@ -72,27 +72,32 @@ namespace PrintBucket.Tests.Services
                 CreatedAt = DateTime.UtcNow
             };
 
-            var response = new GetItemResponse
+            var queryResponse = new QueryResponse
             {
-                Item = new Dictionary<string, AttributeValue>
+                Items = new List<Dictionary<string, AttributeValue>>
                 {
-                    ["id"] = new AttributeValue { S = bucket.Id },
-                    ["email"] = new AttributeValue { S = bucket.Email },
-                    ["name"] = new AttributeValue { S = bucket.Name },
-                    ["accessCode"] = new AttributeValue { S = bucket.AccessCode },
-                    ["status"] = new AttributeValue { S = bucket.Status },
-                    ["createdAt"] = new AttributeValue { S = bucket.CreatedAt.ToString("O") }
+                    new Dictionary<string, AttributeValue>
+                    {
+                        ["hash_key"] = new AttributeValue { S = bucket.Id },
+                        ["email"] = new AttributeValue { S = bucket.Email },
+                        ["name"] = new AttributeValue { S = bucket.Name },
+                        ["accessCode"] = new AttributeValue { S = bucket.AccessCode },
+                        ["status"] = new AttributeValue { S = bucket.Status },
+                        ["createdAt"] = new AttributeValue { S = bucket.CreatedAt.ToString("O") }
+                    }
                 },
+                Count = 1,
                 HttpStatusCode = System.Net.HttpStatusCode.OK
             };
 
             _mockDynamoDb
-                .Setup(x => x.GetItemAsync(
-                    It.Is<GetItemRequest>(r => 
+                .Setup(x => x.QueryAsync(
+                    It.Is<QueryRequest>(r => 
                         r.TableName == TableName && 
-                        r.Key["id"].S == bucket.Id),
+                        r.KeyConditionExpression == "hash_key = :hk" &&
+                        r.ExpressionAttributeValues[":hk"].S == bucket.Id),
                     It.IsAny<CancellationToken>()))
-                .ReturnsAsync(response);
+                .ReturnsAsync(queryResponse);
 
             // Act
             var result = await _service.GetBucketByIdAsync(bucket.Id);
@@ -112,10 +117,14 @@ namespace PrintBucket.Tests.Services
             var id = "nonexistent";
 
             _mockDynamoDb
-                .Setup(x => x.GetItemAsync(
-                    It.IsAny<GetItemRequest>(),
+                .Setup(x => x.QueryAsync(
+                    It.IsAny<QueryRequest>(),
                     It.IsAny<CancellationToken>()))
-                .ReturnsAsync(new GetItemResponse { HttpStatusCode = System.Net.HttpStatusCode.OK });
+                .ReturnsAsync(new QueryResponse 
+                { 
+                    Items = new List<Dictionary<string, AttributeValue>>(),
+                    HttpStatusCode = System.Net.HttpStatusCode.OK 
+                });
 
             // Act
             var result = await _service.GetBucketByIdAsync(id);
@@ -221,7 +230,7 @@ namespace PrintBucket.Tests.Services
                 .ThrowsAsync(new AmazonDynamoDBException("Test exception"));
 
             // Act & Assert
-            await Assert.ThrowsAsync<Exception>(() => 
+            await Assert.ThrowsAsync<AmazonDynamoDBException>(() => 
                 _service.CreateBucketAsync("test@example.com", "Test"));
         }
     }
