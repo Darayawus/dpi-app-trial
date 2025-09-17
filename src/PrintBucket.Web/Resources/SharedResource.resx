@@ -36,6 +36,9 @@
   <data name="NavAccess" xml:space="preserve">
     <value>Access your space</value>
   </data>
+	<data name="Access">
+		<value>Access your space</value>
+	</data>
   <data name="CreateTitle" xml:space="preserve">
     <value>Create your personalized space</value>
   </data>

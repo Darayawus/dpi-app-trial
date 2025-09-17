@@ -29,6 +29,7 @@
   <data name="AccessCodeTitle" xml:space="preserve"><value>Usar código de acceso</value></data>
   <data name="AccessCodeLabel" xml:space="preserve"><value>Código de acceso</value></data>
   <data name="AccessButton" xml:space="preserve"><value>Acceder</value></data>
+  <data name="Access"><value>Accede a tu espacio</value></data>
 
   <!-- Privacy Policy -->
   <data name="Privacy_Title"><value>Política de privacidad</value></data>

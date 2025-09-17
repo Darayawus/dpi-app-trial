@@ -70,6 +70,15 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Access your space.
+        /// </summary>
+        public static string Access {
+            get {
+                return ResourceManager.GetString("Access", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Access.
         /// </summary>
         public static string AccessButton {
