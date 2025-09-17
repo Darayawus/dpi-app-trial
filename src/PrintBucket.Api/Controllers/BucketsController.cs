@@ -46,7 +46,7 @@ namespace PrintBucket.Api.Controllers
         [HttpGet("access/{accessCode}")]
         public async Task<ActionResult<Bucket>> GetByAccessCode(string accessCode)
         {
-            var space = await _bucketService.GetBucketByAccessCodeAsync(accessCode);
+            var space = await _bucketService.GetBucketByIdAsync("bucket-" + accessCode);
             if (space == null)
                 return NotFound();
 
