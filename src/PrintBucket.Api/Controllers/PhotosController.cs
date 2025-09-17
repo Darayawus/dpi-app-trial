@@ -84,5 +84,26 @@ namespace PrintBucket.Api.Controllers
                 return StatusCode(500, "Error processing image");
             }
         }
+
+        // New endpoint: list images for a bucket
+        [HttpGet("bucket/{bucketId}")]
+        public async Task<IActionResult> GetByBucket(string bucketId)
+        {
+            try
+            {
+                // verify bucket exists (optional)
+                var bucket = await _bucketService.GetBucketByIdAsync(bucketId);
+                if (bucket == null)
+                    return NotFound("Bucket not found");
+
+                var images = await _imageService.GetImagesByBucketAsync(bucketId, limit: 100);
+                return Ok(images);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving images for bucket {BucketId}", bucketId);
+                return StatusCode(500, "Error retrieving images");
+            }
+        }
     }
 }

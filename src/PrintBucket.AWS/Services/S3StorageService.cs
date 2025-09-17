@@ -25,7 +25,7 @@ namespace PrintBucket.AWS.Services
         public async Task<List<string>> UploadImageWithVersionsAsync(string bucketName, string bucketId, Stream imageStream, string fileName)
         {
             var extension = Path.GetExtension(fileName);
-            var baseKey = $"{bucketId}/{Path.GetFileNameWithoutExtension(Guid.NewGuid().ToString())}{extension}";
+            var baseKey = $"{bucketId}/o/{Path.GetFileNameWithoutExtension(Guid.NewGuid().ToString())}{extension}";
             var uploadedUrls = new List<string>();
 
             using (var image = NetVips.Image.NewFromStream(imageStream))
