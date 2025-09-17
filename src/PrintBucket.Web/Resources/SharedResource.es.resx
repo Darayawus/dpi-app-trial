@@ -291,4 +291,7 @@
   <data name="AddPhotos" xml:space="preserve">
     <value>Añadir fotos</value>
   </data>
+  <data name="BucketViewTitle" xml:space="preserve">
+    <value>Detalles del espacio</value>
+  </data>
 </root>

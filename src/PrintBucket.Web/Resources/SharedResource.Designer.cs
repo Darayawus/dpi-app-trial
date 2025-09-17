@@ -178,6 +178,15 @@ namespace PrintBucket.Web.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Space details.
+        /// </summary>
+        public static string BucketViewTitle {
+            get {
+                return ResourceManager.GetString("BucketViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cancel.
         /// </summary>
         public static string Cancel {
